@@ -33,7 +33,7 @@
 
 <p>The base URL for the neighborhood redirector is:</p>
 
-<pre><code>https://liveby.co/neighborhood?
+<pre><code>https://liveby.co/neighborhood
 </code></pre>
 
 <p>Additional query parameters are used to direct the user to the correct neighborhood profile based on the brokerage, address, or lat/lon.</p>
@@ -90,16 +90,6 @@
 <blockquote>
 <p>Note that the address query parameter should be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
 </blockquote>
-
-<h4>
-<a id="city" class="anchor" href="#city" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>city</h4>
-
-<p>The <code>city</code> parameter can be used to direct the homebuyer to the LiveBy Neighborhood Finder page for a certain city <em>if</em> there is no neighborhood for the location or address. This is an optional fallback, and is simply a city name like "Lincoln", or "Omaha".</p>
-
-<p>If an address or location is <em>not</em> inside any neighborhood, the neighborhood redirector will direct the user to the Neighborhood Finder for the specified city.</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.67991&amp;lon=-96.5100547&amp;city=Lincoln
-</code></pre>
 
 <h4>
 <a id="utm_source" class="anchor" href="#utm_source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>utm_source</h4>
