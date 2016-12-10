@@ -1,125 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>LiveBy Neighborhood Finder Integration by LiveBy</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">LiveBy Neighborhood Finder Integration</h1>
-      <h2 class="project-tagline">Documentation for integrating with the LiveBy neighborhood finder</h2>
-    </section>
-
-    <section class="main-content">
-      <h2>
-<a id="neighborhood-profile-redirection" class="anchor" href="#neighborhood-profile-redirection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Neighborhood Profile Redirection</h2>
-
-<p>The LiveBy neighborhood finder provides automatic redirection to neighborhood profiles based on an address or lat/lon coordinate. This can be used to create links on property pages that direct homebuyers to neighborhood information for a property or listing.</p>
-
-<p>Here's an example of a dynamic link to direct to the neighborhood profile for a lat/lon coordinate:</p>
-
-<pre><code>&lt;a href="https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.773201&amp;lon=-96.644859" target="_blank"&gt;
-  View Neighborhood Profile
-&lt;/a&gt;
-</code></pre>
-
-<h3>
-<a id="redirection-url" class="anchor" href="#redirection-url" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Redirection URL</h3>
-
-<p>The base URL for the neighborhood redirector is:</p>
-
-<pre><code>https://liveby.co/neighborhood
-</code></pre>
-
-<p>Additional query parameters are used to direct the user to the correct neighborhood profile based on the brokerage, address, or lat/lon.</p>
-
-<h3>
-<a id="required-parameters" class="anchor" href="#required-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
-
-<h4>
-<a id="brokerage" class="anchor" href="#brokerage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>brokerage</h4>
-
-<p>The <code>brokerage</code> parameter is required, and should be the the same as the last part of the neighborhood finder URL, like <code>woodsbros</code>.</p>
-
-<p>Example:</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros
-</code></pre>
-
-<blockquote>
-<p>Note: If only the <code>brokerage</code> parameter is provide, the user will be directed to the brokerage's neighborhood finder page powered by LiveBy.</p>
-</blockquote>
-
-<h3>
-<a id="optional-parameters" class="anchor" href="#optional-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional Parameters</h3>
-
-<h4>
-<a id="latlon" class="anchor" href="#latlon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lat/lon</h4>
-
-<p>If the latitude and longitude coordinates for a location are known, they can be specified as the query parameters <code>lat</code>, and <code>lon</code>.</p>
-
+<head>
+<meta charset="utf-8">
+<title>LiveBy Integration API | Home</title>
+<meta name="description" content="The LiveBy integration API provides methods for accessing neighborhood information, as well as preferences for users who have created an account through the neighborhood discovery tool for brokerages. The API can be used to build custom integration into a content management or customer relationship management system.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/normalize.css" media="screen">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/github-light.css" media="screen">
+</head>
+<body>
+<section class="page-header">
+<h1 class="project-name">
+<a href="/"><img src="/assets/logo.png" alt="LiveBy Integration"></a>
+</h1>
+</section>
+<section class="main-content"><p>The LiveBy integration API provides methods for accessing neighborhood information, as well as preferences for users who have created an account through the neighborhood discovery tool for brokerages. The API can be used to build custom integration into a content management or customer relationship management system.</p>
+<h2 id="-vendor-api-vendor-"><a href="/vendor">Vendor API</a></h2>
+<p>The <a href="./vendor">Vendor API</a> provides methods for securely retrieving neighborhood preference information for users. It requires an access token, which can be retrieved by contacting <a href="mailto:integration@liveby.co">integration@liveby.co</a>.</p>
 <ul>
-<li>
-<code>lat</code>: The latitude. Example, <code>lat=40.773201</code>
-</li>
-<li>
-<code>lon</code>: The longitude. Example, <code>lon=-96.644859</code>
-</li>
+<li><a href="/vendor#user-api">/vendor/user</a></li>
 </ul>
-
-<p>Example:</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.773201&amp;lon=-96.644859
-</code></pre>
-
-<h4>
-<a id="address" class="anchor" href="#address" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>address</h4>
-
-<p>If the latitude and longitude are not known, a complete address can be specified using the <code>address</code> parameter. The address parameter must be a url-encoded/escaped string which includes the address, street, city, state, and zip.</p>
-
-<p>Example:</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros&amp;address=1987%20Sewell%20St%2C%20Lincoln%2C%20NE%2068502
-</code></pre>
-
-<blockquote>
-<p>Note that the address query parameter should be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
-</blockquote>
-
-<h4>
-<a id="utm_source" class="anchor" href="#utm_source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>utm_source</h4>
-
-<p>The optional <code>utm_source</code> parameter identifies the referring source domain and is used for analytics purposes. It's usually a short string, like <code>woodsbros</code>.</p>
-
-<p>Example:</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.773201&amp;lon=-96.644859&amp;utm_source=woodsbros
-</code></pre>
-
-<h4>
-<a id="utm_medium" class="anchor" href="#utm_medium" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>utm_medium</h4>
-
-<p>The optional <code>utm_medium</code> parameter identifies the location of the link on the referring page, and is used to track the success of the placement of a link in different locations or mediums. </p>
-
-<p>Some possible values for <code>utm_medium</code> might be <code>property_listing</code>, <code>banner</code>, or <code>sidebar</code>. While this parameter is optional, it allows LiveBy to provide analytics about the success or popularity of neighborhood profile links in varying locations.</p>
-
-<p>Example:</p>
-
-<pre><code>https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.773201&amp;lon=-96.644859&amp;utm_source=woodsbros&amp;utm_medium=property_listing
-</code></pre>
-
-      <footer class="site-footer">
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+<h2 id="-neighborhood-profile-redirection-profile-redirection-"><a href="/profile-redirection">Neighborhood Profile Redirection</a></h2>
+<p>The LiveBy neighborhood finder provides automatic redirection to neighborhood profiles based on an address or lat/lon coordinate. This can be used to create links on property pages that direct homebuyers to neighborhood information for a property or listing.</p>
+<ul>
+<li><a href="/profile-redirection#neighborhood-profile-redirection">/neighborhood</a></li>
+</ul>
+</section>
+</body>
 </html>

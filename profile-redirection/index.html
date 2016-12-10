@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>LiveBy Integration API | Neighborhood Profile Redirection</title>
+<meta name="description" content="The LiveBy integration API provides methods for accessing neighborhood information, as well as preferences for users who have created an account through the neighborhood discovery tool for brokerages. The API can be used to build custom integration into a content management or customer relationship management system.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/normalize.css" media="screen">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/assets/stylesheets/github-light.css" media="screen">
+</head>
+<body>
+<section class="page-header">
+<h1 class="project-name">
+<a href="/"><img src="/assets/logo.png" alt="LiveBy Integration"></a>
+</h1>
+</section>
+<section class="main-content"><h1 id="neighborhood-profile-redirection">Neighborhood Profile Redirection</h1>
+<p>The LiveBy neighborhood finder provides automatic redirection to neighborhood profiles based on an address or lat/lon coordinate. This can be used to create links on property pages that direct homebuyers to neighborhood information for a property or listing.</p>
+<p>Here&#39;s an example of a dynamic link to direct to the neighborhood profile for a lat/lon coordinate:</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://liveby.co/neighborhood?brokerage=woodsbros&amp;lat=40.773201&amp;lon=-96.644859"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span>
+  View Neighborhood Profile
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><h3 id="redirection-url">Redirection URL</h3>
+<p>The base URL for the neighborhood redirector is:</p>
+<pre><code><span class="hljs-symbol">https:</span><span class="hljs-comment">//liveby.co/neighborhood</span>
+</code></pre><p>Additional query parameters are used to direct the user to the correct neighborhood profile based on the brokerage, address, or lat/lon.</p>
+<h3 id="required-parameters">Required Parameters</h3>
+<h4 id="brokerage">brokerage</h4>
+<p>The <code>brokerage</code> parameter is required, and should be the the same as the last part of the neighborhood finder URL, like <code>woodsbros</code>.</p>
+<p>Example:</p>
+<pre><code><span class="hljs-symbol">https:</span><span class="hljs-comment">//liveby.co/neighborhood?brokerage=woodsbros</span>
+</code></pre><blockquote>
+<p>Note: If only the <code>brokerage</code> parameter is provide, the user will be directed to the brokerage&#39;s neighborhood finder page powered by LiveBy.</p>
+</blockquote>
+<h3 id="optional-parameters">Optional Parameters</h3>
+<h4 id="lat-lon">lat/lon</h4>
+<p>If the latitude and longitude coordinates for a location are known, they can be specified as the query parameters <code>lat</code>, and <code>lon</code>.</p>
+<ul>
+<li><code>lat</code>: The latitude. Example, <code>lat=40.773201</code></li>
+<li><code>lon</code>: The longitude. Example, <code>lon=-96.644859</code></li>
+</ul>
+<p>Example:</p>
+<pre><code>http<span class="hljs-variable">s:</span>//liveby.<span class="hljs-keyword">co</span>/neighborhood?brokerage=woodsbros&amp;<span class="hljs-keyword">lat</span>=<span class="hljs-number">40.773201</span>&amp;lon=-<span class="hljs-number">96.644859</span>
+</code></pre><h4 id="address">address</h4>
+<p>If the latitude and longitude are not known, a complete address can be specified using the <code>address</code> parameter. The address parameter must be a url-encoded/escaped string which includes the address, street, city, state, and zip.</p>
+<p>Example:</p>
+<pre><code><span class="hljs-attribute">https</span>://liveby.co/neighborhood?brokerage=woodsbros&amp;address=1987<span class="hljs-number">%20</span>Sewell<span class="hljs-number">%20</span>St<span class="hljs-number">%2</span>C<span class="hljs-number">%20</span>Lincoln<span class="hljs-number">%2</span>C<span class="hljs-number">%20</span>NE<span class="hljs-number">%2068502</span>
+</code></pre><blockquote>
+<p>Note that the address query parameter should be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
+</blockquote>
+<h4 id="utm_source">utm_source</h4>
+<p>The optional <code>utm_source</code> parameter identifies the referring source domain and is used for analytics purposes. It&#39;s usually a short string, like <code>woodsbros</code>.</p>
+<p>Example:</p>
+<pre><code>http<span class="hljs-variable">s:</span>//liveby.<span class="hljs-keyword">co</span>/neighborhood?brokerage=woodsbros&amp;<span class="hljs-keyword">lat</span>=<span class="hljs-number">40.773201</span>&amp;lon=-<span class="hljs-number">96.644859</span>&amp;utm_source=woodsbros
+</code></pre><h4 id="utm_medium">utm_medium</h4>
+<p>The optional <code>utm_medium</code> parameter identifies the location of the link on the referring page, and is used to track the success of the placement of a link in different locations or mediums. </p>
+<p>Some possible values for <code>utm_medium</code> might be <code>property_listing</code>, <code>banner</code>, or <code>sidebar</code>. While this parameter is optional, it allows LiveBy to provide analytics about the success or popularity of neighborhood profile links in varying locations.</p>
+<p>Example:</p>
+<pre><code>http<span class="hljs-variable">s:</span>//liveby.<span class="hljs-keyword">co</span>/neighborhood?brokerage=woodsbros&amp;<span class="hljs-keyword">lat</span>=<span class="hljs-number">40.773201</span>&amp;lon=-<span class="hljs-number">96.644859</span>&amp;utm_source=woodsbros&amp;utm_medium=property_listing
+</code></pre></section>
+</body>
+</html>
