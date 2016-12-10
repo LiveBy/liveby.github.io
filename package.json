@@ -1,0 +1,39 @@
+{
+  "name": "liveby.github.io",
+  "version": "2.0.0",
+  "description": "The LiveBy integration API provides methods for accessing neighborhood information, as well as preferences for users who have created an account through the neighborhood discovery tool for brokerages. The API can be used to build custom integration into a content management or customer relationship management system.",
+  "main": "build.js",
+  "pages": [
+    {
+      "path": "",
+      "title": "Home"
+    },
+    {
+      "path": "profile-redirection",
+      "title": "Neighborhood Profile Redirection"
+    },
+    {
+      "path": "vendor",
+      "title": "Users"
+    }
+  ],
+  "scripts": {
+    "build": "node build",
+    "start": "node build --serve",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon --ext md,mustache,js,json --exec 'npm run start'"
+  },
+  "keywords": [],
+  "author": "Benjamin Barber",
+  "license": "ISC",
+  "dependencies": {
+    "consolidate": "0.14.5",
+    "finalhandler": "0.5.1",
+    "highlight.js": "9.8.0",
+    "marked": "0.3.6",
+    "mkdirp": "0.5.1",
+    "mustache": "2.3.0",
+    "nodemon": "1.11.0",
+    "serve-static": "1.11.1"
+  }
+}
