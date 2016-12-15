@@ -29,7 +29,7 @@
 <p>Note: Query parameters—including the email address—must be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
 </blockquote>
 <p>Additionally, neighborhood preference information can be requested for users who created an account during a specific date range. For example:</p>
-<pre><code>http<span class="hljs-variable">s:</span>//liveby.<span class="hljs-keyword">co</span>/v1/vendor/users?after=<span class="hljs-number">1450132058974</span>&amp;<span class="hljs-keyword">to</span>=<span class="hljs-number">1480634664</span>&amp;brokerage=woodsbros&amp;access_token=<span class="hljs-number">1</span>GcfIcreeoOLXcXnQl6B%<span class="hljs-number">2</span>Fqriggt79LIyGzMb5tc1YLU%<span class="hljs-number">3</span>D
+<pre><code><span class="hljs-attribute">https</span>://liveby.co/v1/vendor/users?after=1450132058974&amp;before=1481753256437&amp;brokerage=woodsbros&amp;access_token=1GcfIcreeoOLXcXnQl6B<span class="hljs-number">%2</span>Fqriggt79LIyGzMb5tc1YLU<span class="hljs-number">%3</span>D
 </code></pre><h4 id="parameters">Parameters</h4>
 <blockquote>
 <p>Note: The <code>brokerage</code> and <code>access_token</code> parameters are required for all vendor API requests.</p>
@@ -190,13 +190,13 @@
 <tr>
 <td><code>preferences</code></td>
 <td>Object</td>
-<td></td>
+<td>See <a href="#example-response">example response</a></td>
 <td>An object containing the user&#39;s neighborhood preferences</td>
 </tr>
 <tr>
 <td><code>favorites</code></td>
 <td>Array</td>
-<td></td>
+<td>See <a href="#example-response">example response</a></td>
 <td>An array containing the user&#39;s favorite neighborhoods</td>
 </tr>
 </tbody>
@@ -208,7 +208,7 @@
         <span class="hljs-attr">"message"</span>: <span class="hljs-string">"success"</span>
     },
     <span class="hljs-attr">"links"</span>: {
-        <span class="hljs-attr">"self"</span>: <span class="hljs-string">"https://localhost/v1/vendor/user?since=1480634634&amp;upto=1480634664&amp;brokerage=liveby&amp;access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D"</span>
+        <span class="hljs-attr">"self"</span>: <span class="hljs-string">"https://localhost/v1/vendor/user?after=1450132058974&amp;before=1481753256437&amp;&amp;brokerage=liveby&amp;access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D"</span>
     },
     <span class="hljs-attr">"data"</span>: [
         {

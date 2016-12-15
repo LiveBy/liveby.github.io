@@ -146,6 +146,7 @@ a {
   .main-content blockquote > :last-child {
     margin-bottom: 0; }
 .main-content table {
+  font-size: .9em;
   display: block;
   width: 100%;
   overflow: auto;

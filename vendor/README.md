@@ -21,7 +21,7 @@ https://liveby.co/v1/vendor/users?email=ben.barber%40liveby.co&brokerage=woodsbr
 Additionally, neighborhood preference information can be requested for users who created an account during a specific date range. For example:
 
 ```
-https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=woodsbros&access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D
+https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&brokerage=woodsbros&access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D
 ```
 
 #### Parameters
@@ -69,8 +69,8 @@ https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=wo
 | `hasAgent` | Boolean | `true` | `true` if the user identified that they were already working with an agent at time of registration |
 | `moveTime` | String | "6 months" | The amount of time before the user is planning to move. One of "1–3 months", "6 months", or "12 months" |  
 | `created` | String | "2016-05-10T18:14:49.327Z" | The time stamp when the user registered, specified as a UTC datetime String |
-| `preferences` | Object | | An object containing the user's neighborhood preferences |
-| `favorites` | Array | | An array containing the user's favorite neighborhoods |
+| `preferences` | Object | See [example response](#example-response) | An object containing the user's neighborhood preferences |
+| `favorites` | Array | See [example response](#example-response) | An array containing the user's favorite neighborhoods |
 
 #### Example Response
 ```json
@@ -80,7 +80,7 @@ https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=wo
         "message": "success"
     },
     "links": {
-        "self": "https://localhost/v1/vendor/user?since=1480634634&upto=1480634664&brokerage=liveby&access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D"
+        "self": "https://localhost/v1/vendor/user?after=1450132058974&before=1481753256437&&brokerage=liveby&access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D"
     },
     "data": [
         {
