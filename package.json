@@ -21,7 +21,7 @@
     "build": "node build",
     "start": "node build --serve",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --ext md,mustache,js,json --exec 'npm run start'"
+    "watch": "nodemon --ext 'md,mustache,js,json' --exec 'npm run start'"
   },
   "keywords": [],
   "author": "Benjamin Barber",
