@@ -20,17 +20,186 @@
 <section class="main-content"><h1 id="vendor-api">Vendor API</h1>
 <p>The Vendor API is a RESTful JSON web service for securely retrieving neighborhood preference information for users. It requires an access token, which can be retrieved by contacting <a href="mailto:integration@liveby.co">integration@liveby.co</a>.</p>
 <h2 id="endpoints">Endpoints</h2>
-<h3 id="vendor-user">vendor/user</h3>
-<p>The <code>vendor/user</code> endpoint allows vendors to retrieve neighborhood preference information for users who have created an account on the LiveBy Neighborhood Finder. Information can be retrieved for a single user, or for all users who created an account within a specific date range.</p>
+<h3 id="vendor-users">vendor/users</h3>
+<p><code>https://liveby.co/v1/vendor/users</code></p>
+<p>Retrieve neighborhood preference information for users who have created an account on the LiveBy Neighborhood Finder. Information can be requested for a single user, or for all users who created an account within a specific date range.</p>
 <p>For example, neighborhood preference information for <code>ben.barber@liveby.co</code> can be accessed at:</p>
-<pre><code><span class="hljs-attribute">https</span>://liveby.co/v1/vendor/users/ben.barber<span class="hljs-number">%40</span>liveby.co?access_token=1GcfIcreeoOLXcXnQl6B<span class="hljs-number">%2</span>Fqriggt79LIyGzMb5tc1YLU<span class="hljs-number">%3</span>D
+<pre><code><span class="hljs-attribute">https</span>://liveby.co/v1/vendor/users?email=ben.barber<span class="hljs-number">%40</span>liveby.co&amp;brokerage=woodsbros&amp;access_token=1GcfIcreeoOLXcXnQl6B<span class="hljs-number">%2</span>Fqriggt79LIyGzMb5tc1YLU<span class="hljs-number">%3</span>D
 </code></pre><blockquote>
-<p>Note that the email address portion must be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
+<p>Note that query parameters—including the email address—must be encoded/escaped using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"><code>encodeURIComponent</code></a> or something similar (like <a href="http://us3.php.net/manual/ro/function.rawurlencode.php"><code>rawurlencode</code></a> in PHP).</p>
 </blockquote>
-<h3 id="example-request">Example Request</h3>
-<pre><code><span class="hljs-attribute">https</span>://liveby.co/v1/vendor/users?since=1480634634&amp;upto=1480634664&amp;brokerage=liveby&amp;access_token=1GcfIcreeoOLXcXnQl6B<span class="hljs-number">%2</span>Fqriggt79LIyGzMb5tc1YLU<span class="hljs-number">%3</span>D
-</code></pre><h3 id="example-response">Example Response</h3>
-<pre><code>{
+<p>Additionally, neighborhood preference information can be requested for users who created an account during a specific date range. For example:</p>
+<pre><code>http<span class="hljs-variable">s:</span>//liveby.<span class="hljs-keyword">co</span>/v1/vendor/users?after=<span class="hljs-number">1450132058974</span>&amp;<span class="hljs-keyword">to</span>=<span class="hljs-number">1480634664</span>&amp;brokerage=woodsbros&amp;access_token=<span class="hljs-number">1</span>GcfIcreeoOLXcXnQl6B%<span class="hljs-number">2</span>Fqriggt79LIyGzMb5tc1YLU%<span class="hljs-number">3</span>D
+</code></pre><h4 id="parameters">Parameters</h4>
+<blockquote>
+<p>The <code>brokerage</code> and <code>access_token</code> parameters are required for all vendor API requests.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>Example</th>
+<th style="text-align:center">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>access_token</code></td>
+<td>required</td>
+<td>1G2csdf…</td>
+<td style="text-align:center"></td>
+<td>The access_token provided to your brokerage or vendor. Contact <a href="mailto:integrations@liveby.co">integrations@liveby.co</a> to retrieve an API access token or invalidate a compromised token.</td>
+</tr>
+<tr>
+<td><code>brokerage</code></td>
+<td>required</td>
+<td>woodsbros</td>
+<td style="text-align:center"></td>
+<td>The brokerage identifier, which is the same as the last part of the neighborhood finder URL.</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td></td>
+<td>ben.barber%40liveby.co</td>
+<td style="text-align:center"></td>
+<td>A URL-encoded email address</td>
+</tr>
+<tr>
+<td><code>after</code></td>
+<td></td>
+<td>1450132058974</td>
+<td style="text-align:center">0</td>
+<td>A Unix timestamp (in milliseconds) for the beginning date range</td>
+</tr>
+<tr>
+<td><code>before</code></td>
+<td></td>
+<td>1481753256437</td>
+<td style="text-align:center"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now">Date.now()</a></td>
+<td>A Unix timestamp (in milliseconds) for the ending date range</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td></td>
+<td>100</td>
+<td style="text-align:center">100</td>
+<td>The number of users to return, up to 1000</td>
+</tr>
+<tr>
+<td><code>skip</code></td>
+<td></td>
+<td>200</td>
+<td style="text-align:center">0</td>
+<td>The starting point in the user result. Use with <code>limit</code> to implement pagination for results</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Timestamps are specified in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>, which specifies the number of milliseconds since midnight, January 1, 1970. They can be generated in JavaScript with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime">Date#getTime()</a> or in PHP with <a href="http://php.net/manual/en/datetime.gettimestamp.php">DateTime::getTimestamp()</a>.</p>
+</blockquote>
+<h4 id="response-properties">Response Properties</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>meta.status</code></td>
+<td>The HTTP status for the response. Will be <code>200</code> for successful API requests</td>
+</tr>
+<tr>
+<td><code>meta.message</code></td>
+<td>The HTTP status message.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>An array of <strong>error</strong> objects if an error occurred servicing the request</td>
+</tr>
+<tr>
+<td><code>links.next</code></td>
+<td>A URL to the next page of results</td>
+</tr>
+<tr>
+<td><code>links.prev</code></td>
+<td>A URL to the previous page of results. Only present if <code>skip</code> was used</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>An array of <a href="#user-response-object"><strong>user</strong></a> objects containing neighborhood preference information</td>
+</tr>
+</tbody>
+</table>
+<h4 id="user-response-object">User Response Object</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>&quot;5732251987513e322cfab8a1&quot;</td>
+<td>The unique identifier for the user</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>&quot;jsmith@example.com&quot;</td>
+<td>The email address for the user</td>
+</tr>
+<tr>
+<td>fname</td>
+<td>String</td>
+<td>&quot;John&quot;</td>
+<td>The user&#39;s first name, or an empty string (&#39;&#39;) if the user did not provide a first name</td>
+</tr>
+<tr>
+<td>lname</td>
+<td>String</td>
+<td>&quot;Smith&quot;</td>
+<td>The user&#39;s last name, or an empty string if the user did not provide a last name</td>
+</tr>
+<tr>
+<td>hasAgent</td>
+<td>Boolean</td>
+<td><code>true</code></td>
+<td><code>true</code> if the user identified that they were already working with an agent at time of registration</td>
+</tr>
+<tr>
+<td>moveTime</td>
+<td>String</td>
+<td>&quot;6 months&quot;</td>
+<td>The amount of time before the user is planning to move. One of &quot;1–3 months&quot;, &quot;6 months&quot;, or &quot;12 months&quot;</td>
+</tr>
+<tr>
+<td>created</td>
+<td>String</td>
+<td>&quot;2016-05-10T18:14:49.327Z&quot;</td>
+<td>The time stamp when the user registered, specified as a UTC datetime String</td>
+</tr>
+<tr>
+<td>preferences</td>
+<td>Object</td>
+<td></td>
+</tr>
+<tr>
+<td>favorites</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-response">Example Response</h4>
+<pre><code class="lang-json">{
     <span class="hljs-attr">"meta"</span>: {
         <span class="hljs-attr">"status"</span>: <span class="hljs-number">200</span>,
         <span class="hljs-attr">"message"</span>: <span class="hljs-string">"success"</span>
@@ -129,6 +298,7 @@
         }
     ]
 }
-</code></pre></section>
+</code></pre>
+</section>
 </body>
 </html>
