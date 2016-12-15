@@ -62,7 +62,7 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
 #### User Response Object
 
 | Property | Type | Example | Description |
-|-|-|-|
+|-|-|-|-|
 | `_id` | String | "5732251987513e322cfab8a1" | The unique identifier for the user |
 | `email` | String | "jsmith@example.com" | The email address for the user |
 | `fname` | String | "John" | The user's first name, or an empty string ('') if the user did not provide a first name |
