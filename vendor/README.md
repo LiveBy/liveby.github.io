@@ -16,7 +16,7 @@ For example, neighborhood preference information for `ben.barber@liveby.co` can 
 https://liveby.co/v1/vendor/users?email=ben.barber%40liveby.co&brokerage=woodsbros&access_token=1GcfIcreeoOLXcXnQl6B%2Fqriggt79LIyGzMb5tc1YLU%3D
 ```
 
-> Note that query parameters—including the email address—must be encoded/escaped using [`encodeURIComponent`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) or something similar (like [`rawurlencode`](http://us3.php.net/manual/ro/function.rawurlencode.php) in PHP).
+> Note: Query parameters—including the email address—must be encoded/escaped using [`encodeURIComponent`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) or something similar (like [`rawurlencode`](http://us3.php.net/manual/ro/function.rawurlencode.php) in PHP).
 
 Additionally, neighborhood preference information can be requested for users who created an account during a specific date range. For example:
 
@@ -26,7 +26,7 @@ https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=wo
 
 #### Parameters
 
-> The `brokerage` and `access_token` parameters are required for all vendor API requests.
+> Note: The `brokerage` and `access_token` parameters are required for all vendor API requests.
 
 |                |          | Example   | Default  | Description | 
 |-|-|-|:-:|-|
@@ -39,7 +39,7 @@ https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=wo
 | `skip`         |          | 200           |  0  | The starting point in the user result. Use with `limit` to implement pagination for results |
 
 
-> Timestamps are specified in [Unix time], which specifies the number of milliseconds since midnight, January 1, 1970. They can be generated in JavaScript with [Date#getTime()] or in PHP with [DateTime::getTimestamp()].
+> Note: Timestamps are specified in [Unix time], which specifies the number of milliseconds since midnight, January 1, 1970. They can be generated in JavaScript with [Date#getTime()] or in PHP with [DateTime::getTimestamp()].
   
   [integrations@liveby.co]: mailto:integrations@liveby.co
   [Unix time]: https://en.wikipedia.org/wiki/Unix_time
@@ -62,15 +62,15 @@ https://liveby.co/v1/vendor/users?after=1450132058974&to=1480634664&brokerage=wo
 
 | Property | Type | Example | Description |
 |-|-|-|
-| _id | String | "5732251987513e322cfab8a1" | The unique identifier for the user |
-| email | String | "jsmith@example.com" | The email address for the user |
-| fname | String | "John" | The user's first name, or an empty string ('') if the user did not provide a first name |
-| lname | String | "Smith" | The user's last name, or an empty string if the user did not provide a last name |
-| hasAgent | Boolean | `true` | `true` if the user identified that they were already working with an agent at time of registration |
-| moveTime | String | "6 months" | The amount of time before the user is planning to move. One of "1–3 months", "6 months", or "12 months" |  
-| created | String | "2016-05-10T18:14:49.327Z" | The time stamp when the user registered, specified as a UTC datetime String |
-| preferences | Object | | 
-| favorites | | |
+| `_id` | String | "5732251987513e322cfab8a1" | The unique identifier for the user |
+| `email` | String | "jsmith@example.com" | The email address for the user |
+| `fname` | String | "John" | The user's first name, or an empty string ('') if the user did not provide a first name |
+| `lname` | String | "Smith" | The user's last name, or an empty string if the user did not provide a last name |
+| `hasAgent` | Boolean | `true` | `true` if the user identified that they were already working with an agent at time of registration |
+| `moveTime` | String | "6 months" | The amount of time before the user is planning to move. One of "1–3 months", "6 months", or "12 months" |  
+| `created` | String | "2016-05-10T18:14:49.327Z" | The time stamp when the user registered, specified as a UTC datetime String |
+| `preferences` | Object | | An object containing the user's neighborhood preferences |
+| `favorites` | Array | | An array containing the user's favorite neighborhoods |
 
 #### Example Response
 ```json
