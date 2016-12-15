@@ -1,6 +1,8 @@
 # Vendor API
 
-The Vendor API is a RESTful JSON web service for securely retrieving neighborhood preference information for users. It requires an access token, which can be retrieved by contacting <a href="mailto:integration@liveby.co">integration@liveby.co</a>.
+The Vendor API is a RESTful JSON web service for securely retrieving neighborhood preference information for users. It requires an access token, which can be retrieved by contacting [integration@liveby.co].
+
+  [integration@liveby.co]: mailto:integration@liveby.co
 
 ## Endpoints
 
@@ -30,7 +32,7 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
 
 |                |          | Example   | Default  | Description | 
 |-|-|-|:-:|-|
-| `access_token` | required | 1G2csdf…  | |  The access\_token provided to your brokerage or vendor. Contact [integrations@liveby.co] to retrieve an API access token or invalidate a compromised token.          |
+| `access_token` | required | 1G2csdf…  | |  The access\_token provided to your brokerage or vendor. Contact [integration@liveby.co] to retrieve an API access token or invalidate a compromised token.          |
 | `brokerage`    | required | woodsbros |  | The brokerage identifier, which is the same as the last part of the neighborhood finder URL.          |
 | `email`        |          | ben.barber%40liveby.co |  | A URL-encoded email address         |
 | `after`        |          | 1450132058974 |  0 | A Unix timestamp (in milliseconds) for the beginning date range |
@@ -41,7 +43,6 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
 
 > Note: Timestamps are specified in [Unix time], which specifies the number of milliseconds since midnight, January 1, 1970. They can be generated in JavaScript with [Date#getTime()] or in PHP with [DateTime::getTimestamp()].
   
-  [integrations@liveby.co]: mailto:integrations@liveby.co
   [Unix time]: https://en.wikipedia.org/wiki/Unix_time
   [Date.now()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
   [DateTime::getTimestamp()]: http://php.net/manual/en/datetime.gettimestamp.php
