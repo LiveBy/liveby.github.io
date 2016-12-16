@@ -81,14 +81,14 @@
 <td>A Unix timestamp (in milliseconds) for the ending date range</td>
 </tr>
 <tr>
-<td><code>limit</code></td>
+<td><code>page[limit]</code></td>
 <td></td>
 <td>100</td>
 <td style="text-align:center">100</td>
 <td>The number of users to return, up to 1000</td>
 </tr>
 <tr>
-<td><code>skip</code></td>
+<td><code>page[offset]</code></td>
 <td></td>
 <td>200</td>
 <td style="text-align:center">0</td>
@@ -122,11 +122,11 @@
 </tr>
 <tr>
 <td><code>links.next</code></td>
-<td>A URL to the next page of results</td>
+<td>A URL to the next page of results if <code>page[limit]</code> was used</td>
 </tr>
 <tr>
 <td><code>links.prev</code></td>
-<td>A URL to the previous page of results. Only present if <code>skip</code> was used</td>
+<td>A URL to the previous page of results. Only present if <code>page[offset]</code> was used</td>
 </tr>
 <tr>
 <td><code>data</code></td>
@@ -226,19 +226,32 @@
                 },
                 <span class="hljs-attr">"favorites"</span>: [
                     {
-                        <span class="hljs-attr">"INTPTLAT"</span>: <span class="hljs-string">"41.25976992792788"</span>,
-                        <span class="hljs-attr">"INTPTLON"</span>: <span class="hljs-string">"-96.04126727327323"</span>,
-                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Westside"</span>
+                        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56699b76dd4700202391c616"</span>,
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Westside"</span>,
+                        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"https://liveby.co/liveby/neighborhood/56699b76dd4700202391c616?utm_source=liveby&amp;utm_medium=api"</span>,
+                        <span class="hljs-attr">"lat"</span>: <span class="hljs-string">"41.25976992792788"</span>,
+                        <span class="hljs-attr">"lon"</span>: <span class="hljs-string">"-96.04126727327323"</span>
                     },
                     {
-                        <span class="hljs-attr">"INTPTLAT"</span>: <span class="hljs-string">"41.2357568112745"</span>,
-                        <span class="hljs-attr">"INTPTLON"</span>: <span class="hljs-string">"-96.00966760294118"</span>,
-                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Aksarben"</span>
+                        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56699b76dd4700202391c618"</span>,
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Aksarben"</span>,
+                        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"https://liveby.co/liveby/neighborhood/56699b76dd4700202391c618?utm_source=liveby&amp;utm_medium=api"</span>,
+                        <span class="hljs-attr">"lat"</span>: <span class="hljs-string">"41.2357568112745"</span>,
+                        <span class="hljs-attr">"lon"</span>: <span class="hljs-string">"-96.00966760294118"</span>
                     },
                     {
-                        <span class="hljs-attr">"INTPTLAT"</span>: <span class="hljs-string">"40.761958765137635"</span>,
-                        <span class="hljs-attr">"INTPTLON"</span>: <span class="hljs-string">"-96.63362331009176"</span>,
-                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Colonial Hills"</span>
+                        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56699b76dd4700202391c61a"</span>,
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Colonial Hills"</span>,
+                        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61a?utm_source=liveby&amp;utm_medium=api"</span>,
+                        <span class="hljs-attr">"lat"</span>: <span class="hljs-string">"40.761958765137635"</span>,
+                        <span class="hljs-attr">"lon"</span>: <span class="hljs-string">"-96.63362331009176"</span>
+                    },
+                    {
+                        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56699b76dd4700202391c61c"</span>,
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Haymarket"</span>,
+                        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61c?utm_source=liveby&amp;utm_medium=api"</span>,
+                        <span class="hljs-attr">"lat"</span>: <span class="hljs-string">"40.81228593212669"</span>,
+                        <span class="hljs-attr">"lon"</span>: <span class="hljs-string">"-96.70411726696835"</span>
                     }
                 ]
             }
@@ -271,9 +284,11 @@
                 },
                 <span class="hljs-attr">"favorites"</span>: [
                     {
-                        <span class="hljs-attr">"INTPTLAT"</span>: <span class="hljs-string">"40.761958765137635"</span>,
-                        <span class="hljs-attr">"INTPTLON"</span>: <span class="hljs-string">"-96.63362331009176"</span>,
-                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Colonial Hills"</span>
+                        <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56699b76dd4700202391c61a"</span>,
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Colonial Hills"</span>,
+                        <span class="hljs-attr">"href"</span>: <span class="hljs-string">"https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61a?utm_source=liveby&amp;utm_medium=api"</span>,
+                        <span class="hljs-attr">"lat"</span>: <span class="hljs-string">"40.761958765137635"</span>,
+                        <span class="hljs-attr">"lon"</span>: <span class="hljs-string">"-96.63362331009176"</span>
                     }
                 ]
             }

@@ -37,8 +37,8 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
 | `email`        |          | ben.barber%40liveby.co |  | A URL-encoded email address         |
 | `after`        |          | 1450132058974 |  0 | A Unix timestamp (in milliseconds) for the beginning date range |
 | `before`       |          | 1481753256437 | [Date.now()] | A Unix timestamp (in milliseconds) for the ending date range |
-| `limit`        |          | 100           | 100 | The number of users to return, up to 1000 |
-| `skip`         |          | 200           |  0  | The starting point in the user result. Use with `limit` to implement pagination for results |
+| `page[limit]`        |          | 100           | 100 | The number of users to return, up to 1000 |
+| `page[offset]`         |          | 200           |  0  | The starting point in the user result. Use with `limit` to implement pagination for results |
 
 
 > Note: Timestamps are specified in [Unix time], which specifies the number of milliseconds since midnight, January 1, 1970. They can be generated in JavaScript with [Date#getTime()] or in PHP with [DateTime::getTimestamp()].
@@ -55,8 +55,8 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
 | `meta.status` | The HTTP status for the response. Will be `200` for successful API requests |
 | `meta.message`| The HTTP status message. |
 | `errors`| An array of **error** objects if an error occurred servicing the request |
-| `links.next` | A URL to the next page of results | 
-| `links.prev` | A URL to the previous page of results. Only present if `skip` was used | 
+| `links.next` | A URL to the next page of results if `page[limit]` was used | 
+| `links.prev` | A URL to the previous page of results. Only present if `page[offset]` was used | 
 | `data` | An array of [**user**](#user-response-object) objects containing neighborhood preference information |
 
 #### User Response Object
@@ -99,19 +99,32 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
                 },
                 "favorites": [
                     {
-                        "INTPTLAT": "41.25976992792788",
-                        "INTPTLON": "-96.04126727327323",
-                        "label": "Westside"
+                        "_id": "56699b76dd4700202391c616",
+                        "label": "Westside",
+                        "href": "https://liveby.co/liveby/neighborhood/56699b76dd4700202391c616?utm_source=liveby&utm_medium=api",
+                        "lat": "41.25976992792788",
+                        "lon": "-96.04126727327323"
                     },
                     {
-                        "INTPTLAT": "41.2357568112745",
-                        "INTPTLON": "-96.00966760294118",
-                        "label": "Aksarben"
+                        "_id": "56699b76dd4700202391c618",
+                        "label": "Aksarben",
+                        "href": "https://liveby.co/liveby/neighborhood/56699b76dd4700202391c618?utm_source=liveby&utm_medium=api",
+                        "lat": "41.2357568112745",
+                        "lon": "-96.00966760294118"
                     },
                     {
-                        "INTPTLAT": "40.761958765137635",
-                        "INTPTLON": "-96.63362331009176",
-                        "label": "Colonial Hills"
+                        "_id": "56699b76dd4700202391c61a",
+                        "label": "Colonial Hills",
+                        "href": "https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61a?utm_source=liveby&utm_medium=api",
+                        "lat": "40.761958765137635",
+                        "lon": "-96.63362331009176"
+                    },
+                    {
+                        "_id": "56699b76dd4700202391c61c",
+                        "label": "Haymarket",
+                        "href": "https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61c?utm_source=liveby&utm_medium=api",
+                        "lat": "40.81228593212669",
+                        "lon": "-96.70411726696835"
                     }
                 ]
             }
@@ -144,9 +157,11 @@ https://liveby.co/v1/vendor/users?after=1450132058974&before=1481753256437&broke
                 },
                 "favorites": [
                     {
-                        "INTPTLAT": "40.761958765137635",
-                        "INTPTLON": "-96.63362331009176",
-                        "label": "Colonial Hills"
+                        "_id": "56699b76dd4700202391c61a",
+                        "label": "Colonial Hills",
+                        "href": "https://liveby.co/liveby/neighborhood/56699b76dd4700202391c61a?utm_source=liveby&utm_medium=api",
+                        "lat": "40.761958765137635",
+                        "lon": "-96.63362331009176"
                     }
                 ]
             }
