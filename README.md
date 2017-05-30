@@ -3,7 +3,8 @@ The LiveBy integration API provides methods for accessing neighborhood informati
 
 ## [Vendor API](/vendor)
 
-The <a href="./vendor">Vendor API</a> provides methods for securely retrieving neighborhood preference information for users. It requires an access token, which can be retrieved by contacting <a href="mailto:integration@liveby.co">integration@liveby.co</a>.
+The <a href="./vendor">Vendor API</a> provides methods for securely retrieving neighborhood preference information for users. 
+<strong><a href="https://liveby.com/contact#interests:api">Contact us</a></strong> to receive an API access token.
 
 - [/vendor/user](/vendor#user-api)
 
