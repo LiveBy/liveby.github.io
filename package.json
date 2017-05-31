@@ -5,8 +5,7 @@
   "main": "build.js",
   "pages": [
     {
-      "path": "",
-      "title": "Home"
+      "path": ""
     },
     {
       "path": "profile-redirection",
