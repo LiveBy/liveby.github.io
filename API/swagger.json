@@ -1,16 +1,17 @@
 {
   "swagger": "2.0",
   "info": {
+    "description": "Access LiveBy's entire suite of hyper-local data through our custom API to create or enhance your own products. Need API access? Let us know!",
     "version": "1.0.0",
-    "title": "LiveBy profiles API",
-    "description": "LiveBy's API for neighborhood profiles"
+    "title": "LiveBy",
+    "termsOfService": "https://liveby.com/terms/"
   },
   "host": "api.liveby.com",
   "basePath": "/v1",
   "tags": [
     {
-      "name": "profiles",
-      "description": "API endpoints for profile components"
+      "name": "Endpoints",
+      "description": "API endpoints"
     }
   ],
   "schemes": [
@@ -26,7 +27,7 @@
     "/simply-rets-service/properties": {
       "post": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get properties in the given geometry.",
         "parameters": [
@@ -89,7 +90,7 @@
     "/local-insights": {
       "get": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get list of attributes people say about this area.",
         "parameters": [
@@ -121,7 +122,7 @@
     "/schools": {
       "get": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get schools and the info about them, sorted by distance to the requested point.",
         "consumes": [
@@ -163,7 +164,7 @@
     "/market-stats": {
       "post": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get market stats, by month, for a given area.",
         "parameters": [
@@ -209,7 +210,7 @@
     "/agents/insights": {
       "get": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get agent's description of a neighborhood.",
         "parameters": [
@@ -239,7 +240,7 @@
     "/yelp-businesses": {
       "post": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get points of interest in the area.",
         "parameters": [
@@ -258,7 +259,6 @@
                   "type": "string"
                 },
                 "geometry": {
-                  "description": "geometry used to search for, and filter points of interest in.",
                   "$ref": "#/definitions/Geometry"
                 }
               }
@@ -278,7 +278,7 @@
     "/events": {
       "post": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get events near this geometry.",
         "parameters": [
@@ -307,7 +307,7 @@
     "/properties-attribute-aggregators": {
       "post": {
         "tags": [
-          "profiles"
+          "Endpoints"
         ],
         "description": "Get current, or historical information about the market in the area.",
         "parameters": [
@@ -1508,9 +1508,6 @@
       "required": [
         "type"
       ],
-      "externalDocs": {
-        "url": "http://geojson.org/geojson-spec.html#geometry-objects"
-      },
       "properties": {
         "type": {
           "type": "string",
@@ -1538,9 +1535,6 @@
     "Polygon": {
       "type": "array",
       "description": "GeoJSon geometry",
-      "externalDocs": {
-        "url": "http://geojson.org/geojson-spec.html#id4"
-      },
       "items": {
         "type": "array",
         "items": {
@@ -1551,9 +1545,6 @@
     "MultiPolygon": {
       "type": "array",
       "description": "GeoJSon geometry",
-      "externalDocs": {
-        "url": "http://geojson.org/geojson-spec.html#id6"
-      },
       "items": {
         "type": "array",
         "items": {
