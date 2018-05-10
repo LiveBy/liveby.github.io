@@ -27,13 +27,14 @@
   "license": "ISC",
   "dependencies": {
     "consolidate": "0.14.5",
-    "finalhandler": "0.5.1",
+    "deep-extend": "0.5.1",
+    "finalhandler": "1.1.1",
     "highlight.js": "9.8.0",
-    "marked": "0.3.6",
+    "marked": "0.3.19",
     "mkdirp": "0.5.1",
     "mustache": "2.3.0",
-    "nodemon": "1.11.0",
-    "serve-static": "1.11.1"
+    "nodemon": "1.17.4",
+    "serve-static": "1.13.2"
   },
   "devDependencies": {},
   "repository": {
