@@ -348,6 +348,72 @@
           }
         }
       }
+    },
+    "/demographics": {
+      "post": {
+        "description": "Get demographics for a place.",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The place to calculate demographics for.",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "neighborhood": {
+                  "type": "object",
+                  "properties": {
+                    "geometry": {
+                      "$ref": "#/definitions/Geometry"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Demographics"
+            }
+          }
+        }
+      }
+    },
+    "/housing": {
+      "post": {
+        "description": "Get housing information for a place.",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The place to calculate housing information for.",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "neighborhood": {
+                  "type": "object",
+                  "properties": {
+                    "geometry": {
+                      "$ref": "#/definitions/Geometry"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Housing"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1498,6 +1564,140 @@
         },
         "count": {
           "type": "integer"
+        }
+      }
+    },
+    "Demographics": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "demographics": {
+              "type": "object",
+              "properties": {
+                "population": {
+                  "type": "integer"
+                },
+                "median_age": {
+                  "type": "number"
+                },
+                "ages": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "ages_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "median_household_income": {
+                  "type": "number"
+                },
+                "unemployment_rate": {
+                  "type": "null"
+                },
+                "diversity": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "asian": {
+                      "type": "integer"
+                    },
+                    "african_american": {
+                      "type": "integer"
+                    },
+                    "hispanic": {
+                      "type": "integer"
+                    },
+                    "multiracial": {
+                      "type": "integer"
+                    },
+                    "native_american": {
+                      "type": "integer"
+                    },
+                    "other": {
+                      "type": "integer"
+                    },
+                    "pacific_islander": {
+                      "type": "integer"
+                    },
+                    "white": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "diversity_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "total_educated": {
+                  "type": "integer"
+                },
+                "below_high_school_education": {
+                  "type": "integer"
+                },
+                "high_school_education": {
+                  "type": "integer"
+                },
+                "college_associate_degree": {
+                  "type": "integer"
+                },
+                "college_bachelor_degree": {
+                  "type": "integer"
+                },
+                "college_graduate_professional_degree": {
+                  "type": "integer"
+                },
+                "education_levels_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Housing": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "housing": {
+              "type": "object",
+              "properties": {
+                "median_home_construction": {
+                  "type": "integer"
+                },
+                "median_rent": {
+                  "type": "integer"
+                },
+                "home_occupied_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "renter_occupied": {
+                  "type": "integer"
+                },
+                "owner_occupied": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
         }
       }
     },
