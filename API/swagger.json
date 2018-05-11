@@ -351,6 +351,9 @@
     },
     "/demographics": {
       "post": {
+        "tags": [
+          "Endpoints"
+        ],
         "description": "Get demographics for a place.",
         "parameters": [
           {
@@ -384,6 +387,9 @@
     },
     "/housing": {
       "post": {
+        "tags": [
+          "Endpoints"
+        ],
         "description": "Get housing information for a place.",
         "parameters": [
           {
