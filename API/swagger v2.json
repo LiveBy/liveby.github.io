@@ -1,0 +1,2732 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Access LiveBy's entire suite of hyper-local data through our custom API to create or enhance your own products.",
+    "version": "2.0.0",
+    "title": "LiveBy Hyperlocal Content API",
+    "termsOfService": "https://liveby.com/terms/"
+  },
+  "host": "api.liveby.com",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Boundaries by ID",
+      "description": "Individual GeoJSON shape."
+    },
+    {
+      "name": "Boundaries by location",
+      "description": "GeoJSON shapes that represent different types of boundaries."
+    },
+    {
+      "name": "Local Content Datasets",
+      "description": "A set of data that pertains to a specific GeoJSON boundary."
+    },
+    {
+      "name": "Individual Content",
+      "description": "Detailed data on individual items."
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/agent-insights/:pageId": {
+      "get": {
+        "tags": [
+          "Individual Content"
+        ],
+        "description": "Get a list of insights that real-estate agents have submitted on a page.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pageID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/AgentInsight"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schools": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get a list of schools in the boundary.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Schools"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schools/:schoolId": {
+      "get": {
+        "tags": [
+          "Individual Content"
+        ],
+        "description": "Get detailed data on an individual school.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "schoolID": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/School"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/businesses/:businessId": {
+      "get": {
+        "tags": [
+          "Individual Content"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/businesses": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/landmarks": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/market-trends": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/landmarks/:landmarkId": {
+      "get": {
+        "tags": [
+          "Individual Content"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/:eventId": {
+      "get": {
+        "tags": [
+          "Individual Content"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/environment": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demographics": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get demographic-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Demographic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crime": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get crime-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Crime"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commute": {
+      "post": {
+        "tags": [
+          "Local Content Datasets"
+        ],
+        "description": "Get commute-related information on an area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Commute"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/cities/:cityId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "cityId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/cities": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/neighborhoods/:neighborhoodId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "neighborhoodId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/neighborhoods": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/urban-areas/:urbanAreaId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "urbanAreaId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/urban-areas": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/metro-stat-areas/:metroStatAreaId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "metroStatAreaId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/metro-stat-areas": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/metro-divisions/:metroDivisionId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "metroDivisionId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/metro-divisions": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/elementary-school-attendance-zone/:elementarySchoolAttendanceZoneId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "elementarySchoolAttendanceZoneId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/elementary-school-attendance-zone": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/secondary-school-attendance-zone/:secondarySchoolAttendanceZoneId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "secondarySchoolAttendanceZoneId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/secondary-school-attendance-zone": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/unified-school-attendance-zone/:unifiedSchoolAttendanceZoneId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "unifiedSchoolAttendanceZoneId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/unified-school-attendance-zone": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/county-subdivisions/:countySubdivisionId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "countySubdivisionId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/county-subdivisions": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/counties/:countyId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "countyId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/counties": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/combined-stat-areas/:combinedStatAreaId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "combinedStatAreaId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/combined-stat-areas": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/census-tracts/:censusTractId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "censusTractId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/census-tracts": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/block-groups/:blockGroupId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "blockGroupId",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/block-groups": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/blocks/:blockId": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "block ID",
+            "in": "query",
+            "description": "The ID of the census block",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/blocks": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/zipcodes/:zipcode": {
+      "get": {
+        "tags": [
+          "Boundaries by ID"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "zipcode",
+            "in": "query",
+            "description": "Zipcode (5 digit)",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/zipcodes": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "description": "Geographical boundaries.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "description": "City",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "State",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zipcode",
+            "in": "query",
+            "description": "Zip Code",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Boundary"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Schools": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/School"
+          }
+        }
+      }
+    },
+    "School": {
+      "type": "object",
+      "properties": {
+        "gsId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "gradeRange": {
+          "type": "string"
+        },
+        "enrollment": {
+          "type": "string"
+        },
+        "gsRating": {
+          "type": "string"
+        },
+        "parentRating": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "districtId": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "districtNCESId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "website": {
+          "type": "object"
+        },
+        "ncesId": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "string"
+        },
+        "lon": {
+          "type": "string"
+        },
+        "overviewLink": {
+          "type": "string"
+        },
+        "ratingsLink": {
+          "type": "string"
+        },
+        "reviewsLink": {
+          "type": "string"
+        },
+        "distance": {
+          "type": "string"
+        },
+        "schoolStatsLink": {
+          "type": "string"
+        }
+      }
+    },
+    "marketStats": {
+      "type": "object",
+      "properties": {
+        "DOM": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ExpectToPay": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "YearBuilt": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PPSF": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SalePrice": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "AmountOfSales": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AgentInsight": {
+      "type": "object",
+      "properties": {
+        "insights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "brokerage": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "brokerageName": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "photo": {
+                "type": "string"
+              },
+              "neighborhood": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PointsOfInterest": {
+      "type": "object",
+      "properties": {
+        "dining": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "shopping": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "active": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "nightlife": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "beauty": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "html": {
+                    "type": "string"
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "html": {
+                    "type": "string"
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "utc": {
+                    "type": "string"
+                  }
+                }
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "utc": {
+                    "type": "string"
+                  }
+                }
+              },
+              "organization_id": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string"
+              },
+              "changed": {
+                "type": "string"
+              },
+              "capacity": {
+                "type": "integer"
+              },
+              "capacity_is_custom": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "listed": {
+                "type": "boolean"
+              },
+              "shareable": {
+                "type": "boolean"
+              },
+              "online_event": {
+                "type": "boolean"
+              },
+              "tx_time_limit": {
+                "type": "integer"
+              },
+              "hide_start_date": {
+                "type": "boolean"
+              },
+              "hide_end_date": {
+                "type": "boolean"
+              },
+              "locale": {
+                "type": "string"
+              },
+              "is_locked": {
+                "type": "boolean"
+              },
+              "privacy_setting": {
+                "type": "string"
+              },
+              "is_series": {
+                "type": "boolean"
+              },
+              "is_series_parent": {
+                "type": "boolean"
+              },
+              "is_reserved_seating": {
+                "type": "boolean"
+              },
+              "show_pick_a_seat": {
+                "type": "boolean"
+              },
+              "show_seatmap_thumbnail": {
+                "type": "boolean"
+              },
+              "show_colors_in_seatmap_thumbnail": {
+                "type": "boolean"
+              },
+              "source": {
+                "type": "string"
+              },
+              "is_free": {
+                "type": "boolean"
+              },
+              "version": {
+                "type": "string"
+              },
+              "logo_id": {
+                "type": "string"
+              },
+              "organizer_id": {
+                "type": "string"
+              },
+              "venue_id": {
+                "type": "string"
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "subcategory_id": {
+                "type": "string"
+              },
+              "format_id": {
+                "type": "string"
+              },
+              "resource_uri": {
+                "type": "string"
+              },
+              "series_id": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "object",
+                "properties": {
+                  "crop_mask": {
+                    "type": "object",
+                    "properties": {
+                      "top_left": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "integer"
+                          },
+                          "y": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "width": {
+                        "type": "integer"
+                      },
+                      "height": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "original": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "integer"
+                      },
+                      "height": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "aspect_ratio": {
+                    "type": "string"
+                  },
+                  "edge_color": {
+                    "type": "string"
+                  },
+                  "edge_color_set": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "PropertyAreaInfo": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "avgBedrooms": {
+          "type": "number"
+        },
+        "avgBathrooms": {
+          "type": "number"
+        },
+        "avgSquareFeet": {
+          "type": "number"
+        },
+        "minPrice": {
+          "type": "integer"
+        },
+        "maxPrice": {
+          "type": "integer"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "Housing": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "housing": {
+              "type": "object",
+              "properties": {
+                "median_home_construction": {
+                  "type": "integer"
+                },
+                "median_rent": {
+                  "type": "integer"
+                },
+                "home_occupied_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "renter_occupied": {
+                  "type": "integer"
+                },
+                "owner_occupied": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Demographic": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "demographics": {
+              "type": "object",
+              "properties": {
+                "population": {
+                  "type": "integer"
+                },
+                "median_age": {
+                  "type": "number"
+                },
+                "ages": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "ages_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "median_household_income": {
+                  "type": "number"
+                },
+                "unemployment_rate": {
+                  "type": "null"
+                },
+                "diversity": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "asian": {
+                      "type": "integer"
+                    },
+                    "african_american": {
+                      "type": "integer"
+                    },
+                    "hispanic": {
+                      "type": "integer"
+                    },
+                    "multiracial": {
+                      "type": "integer"
+                    },
+                    "native_american": {
+                      "type": "integer"
+                    },
+                    "other": {
+                      "type": "integer"
+                    },
+                    "pacific_islander": {
+                      "type": "integer"
+                    },
+                    "white": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "diversity_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "total_educated": {
+                  "type": "integer"
+                },
+                "below_high_school_education": {
+                  "type": "integer"
+                },
+                "high_school_education": {
+                  "type": "integer"
+                },
+                "college_associate_degree": {
+                  "type": "integer"
+                },
+                "college_bachelor_degree": {
+                  "type": "integer"
+                },
+                "college_graduate_professional_degree": {
+                  "type": "integer"
+                },
+                "education_levels_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ageGroups": {
+          "type": "integer"
+        },
+        "disability": {
+          "type": "integer"
+        },
+        "educationalAttainment": {
+          "type": "integer"
+        },
+        "fieldOfDegree": {
+          "type": "integer"
+        },
+        "foreignBorn": {
+          "type": "integer"
+        },
+        "incomeEarnings": {
+          "type": "integer"
+        },
+        "industry": {
+          "type": "integer"
+        },
+        "language": {
+          "type": "integer"
+        },
+        "maritalStatus": {
+          "type": "integer"
+        },
+        "nativeBorn": {
+          "type": "integer"
+        },
+        "occupation": {
+          "type": "integer"
+        },
+        "occupationBenefits": {
+          "type": "integer"
+        },
+        "placeOfBirth": {
+          "type": "integer"
+        },
+        "placeOfWork": {
+          "type": "integer"
+        },
+        "populationCount": {
+          "type": "integer"
+        },
+        "populationDensity": {
+          "type": "integer"
+        },
+        "raceEthnicOrigin": {
+          "type": "integer"
+        },
+        "schoolEnrollment": {
+          "type": "integer"
+        },
+        "sentimentAnalysis": {
+          "type": "integer"
+        },
+        "veteranStatus": {
+          "type": "integer"
+        },
+        "workStatus": {
+          "type": "integer"
+        },
+        "attribution": {
+          "type": "string",
+          "example": "Census Bureau"
+        }
+      }
+    },
+    "Crime": {
+      "type": "object",
+      "description": "Crime data on a boundary.",
+      "properties": {
+        "aggravatedAssault": {
+          "type": "integer"
+        },
+        "burglary": {
+          "type": "integer"
+        },
+        "crimeLocationPointData": {
+          "type": "integer"
+        },
+        "larcenyTheft": {
+          "type": "integer"
+        },
+        "motorVehicleTheft": {
+          "type": "integer"
+        },
+        "murderNonNegligentManslaughter": {
+          "type": "integer"
+        },
+        "rape": {
+          "type": "integer"
+        },
+        "robbery": {
+          "type": "integer"
+        },
+        "attribution": {
+          "type": "string",
+          "example": "Census Bureau"
+        }
+      }
+    },
+    "Commute": {
+      "type": "object",
+      "description": "Commute data on a boundary",
+      "properties": {
+        "bikeScore": {
+          "type": "integer"
+        },
+        "bikeRunningTrails": {
+          "type": "string"
+        },
+        "transportationMethods": {
+          "type": "string"
+        },
+        "workFromHomePercent": {
+          "type": "integer"
+        },
+        "publicTransitRoutes": {
+          "type": "string"
+        },
+        "publicTransitSchedules": {
+          "type": "string"
+        },
+        "publicTransitScore": {
+          "type": "integer"
+        },
+        "travelTimeToWork": {
+          "type": "integer"
+        },
+        "timeLeavingForWork": {
+          "type": "string"
+        },
+        "vehiclesAvailable": {
+          "type": "integer"
+        },
+        "attribution": {
+          "type": "string",
+          "example": "Census Bureau"
+        }
+      }
+    },
+    "Boundary": {
+      "type": "object",
+      "description": "GeoJSON geometry",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/Geometry"
+        },
+        "type": {
+          "type": "string",
+          "example": "Block Group",
+          "enum": [
+            "5-digit ZIP Code Tabulation Area",
+            "County and Equivalent",
+            "County Subdivision",
+            "Elementary school attendance zone",
+            "Metropolitan Division",
+            "Metropolitan/Micropolitan Statistical Area",
+            "Neighborhoods",
+            "Places (Cities)",
+            "Secondary school attendance zone",
+            "Unified school attendance zone",
+            "Urban Areas"
+          ]
+        },
+        "attribution": {
+          "type": "string",
+          "example": "Census Bureau"
+        }
+      }
+    },
+    "Geometry": {
+      "type": "object",
+      "description": "GeoJSON geometry",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Polygon",
+            "MultiPolygon"
+          ],
+          "description": "the geometry type"
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "enum": [
+              {
+                "$ref": "#/definitions/Polygon"
+              },
+              {
+                "$ref": "#/definitions/MultiPolygon"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Polygon": {
+      "type": "array",
+      "description": "GeoJSON geometry",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Point2D"
+        }
+      }
+    },
+    "MultiPolygon": {
+      "type": "array",
+      "description": "GeoJSON geometry",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Point2D"
+          }
+        }
+      }
+    },
+    "Point2D": {
+      "type": "array",
+      "maxItems": 2,
+      "minItems": 2,
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}
