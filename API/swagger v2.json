@@ -462,325 +462,17 @@
         }
       }
     },
-    "/boundaries/cities/:cityId": {
+    "/boundaries/:boundaryId": {
       "get": {
         "tags": [
           "Boundaries by ID"
         ],
-        "description": "Geographical boundaries derived from Census data.",
+        "description": "Returns a single boundary for the LiveBy boundary ID you provide. Boundaries at this endpoint include: school district boundaries (unified, secondary, and elementary), urban areas, zipcodes (non-census), cities, and neighborhoods.",
         "parameters": [
           {
-            "name": "cityId",
+            "name": "boundaryId",
             "in": "query",
-            "description": "ID",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Boundary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/cities": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BoundaryCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/neighborhoods/:neighborhoodId": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "neighborhoodId",
-            "in": "query",
-            "description": "ID",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Boundary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/neighborhoods": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BoundaryCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/zipcodes/:zipcode": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "zipcode",
-            "in": "query",
-            "description": "Zipcode (5 digit)",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Boundary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/zipcodes": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BoundaryCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/urban-areas/:urbanAreaId": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "urbanAreaId",
-            "in": "query",
-            "description": "ID",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Boundary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/urban-areas": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BoundaryCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/school-districts/:schoolDistrictId": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "School district boundaries. Includes unified, secondary, and elementary school districts.",
-        "parameters": [
-          {
-            "name": "schoolDistrictId",
-            "in": "query",
-            "description": "ID",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Boundary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/blocks/:geoid": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "geoid",
-            "in": "path",
-            "description": "The GEOID of the census block",
+            "description": "The LiveBy boundary ID",
             "required": true,
             "type": "string"
           }
@@ -791,256 +483,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/blocks": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CensusFeatureCollection"
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/block-groups/:geoid": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "geoid",
-            "in": "path",
-            "description": "ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/block-groups": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/tracts/:geoid": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "geoid",
-            "in": "path",
-            "description": "ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/tracts": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/public-use-microdata-area/:geoid": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "geoid",
-            "in": "path",
-            "description": "ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/public-use-microdata-area": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
+                "$ref": "#/definitions/Boundary"
               }
             }
           }
@@ -1075,54 +518,12 @@
         }
       }
     },
-    "/boundaries/census/zipcode-tabulation-area": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/county-subdivisions/:geoid": {
+    "/boundaries/census/:geoId": {
       "get": {
         "tags": [
           "Boundaries by ID"
         ],
-        "description": "Geographical boundaries derived from Census data.",
+        "description": "Geographical boundaries derived from Census data. Returns a single boundary that matches the GeoID you provide, with the exception of zip codes (which have a separate endpoint). Supported GeoID census boundary types: blocks, block groups, tracts, public use microdata areas, counties, states, and county subdivisions.",
         "parameters": [
           {
             "name": "geoid",
@@ -1145,236 +546,69 @@
         }
       }
     },
-    "/boundaries/census/county-subdivisions": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/counties/:geoid": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "geoid",
-            "in": "path",
-            "description": "The GEOID of the county",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/counties": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/states/:abbr": {
-      "get": {
-        "tags": [
-          "Boundaries by ID"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "abbr",
-            "in": "path",
-            "description": "The two-letter postal abbreviation, such as \"NE\"",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Feature"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/boundaries/census/states": {
-      "get": {
-        "tags": [
-          "Boundaries by location"
-        ],
-        "description": "Geographical boundaries derived from Census data.",
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "description": "Latitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "Longitude",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "radius",
-            "in": "query",
-            "description": "Radius",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CensusFeatureCollection"
-              }
-            }
-          }
-        }
-      }
-    },
     "/boundaries": {
       "get": {
         "tags": [
           "Boundaries by location"
         ],
-        "description": "Geographical boundaries.",
+        "description": "Non-census geographical boundaries, searchable by location (lat,lng,radius), zipcode, city, or state.",
         "parameters": [
           {
             "name": "lat",
             "in": "query",
             "description": "Latitude",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {
             "name": "lng",
             "in": "query",
             "description": "Longitude",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {
             "name": "radius",
             "in": "query",
             "description": "Radius",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {
             "name": "city",
             "in": "query",
             "description": "City",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "state",
             "in": "query",
             "description": "State",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "zipcode",
             "in": "query",
             "description": "Zip Code",
-            "required": true,
+            "required": false,
             "type": "integer"
+          },
+          {
+            "name": "boundaryTypes",
+            "type": "array",
+            "required": false,
+            "in": "query",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cities",
+                "neighborhoods",
+                "zipcodes",
+                "urban-areas"
+              ]
+            }
           }
         ],
         "responses": {
@@ -1385,6 +619,64 @@
               "items": {
                 "$ref": "#/definitions/BoundaryCollection"
               }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/census/": {
+      "get": {
+        "tags": [
+          "Boundaries by location"
+        ],
+        "summary": "Geographical boundaries derived from Census data.",
+        "parameters": [
+          {
+            "name": "lat",
+            "description": "Latitude",
+            "type": "integer",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "lng",
+            "description": "Longitude",
+            "type": "integer",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "radius",
+            "description": "Radius in meters",
+            "type": "integer",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "censusBoundaryTypes",
+            "type": "array",
+            "required": true,
+            "in": "query",
+            "items": {
+              "type": "string",
+              "enum": [
+                "blocks",
+                "block-groups",
+                "tracts",
+                "public-use-microdata-area",
+                "zipcode-tabulation-area",
+                "county-subdivision",
+                "counties",
+                "states"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CensusFeatureCollection"
             }
           }
         }
@@ -1894,11 +1186,71 @@
     "MarketTrends": {
       "type": "object",
       "properties": {
+        "PropertyAreaInfo": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "avgBedrooms": {
+              "type": "number"
+            },
+            "avgBathrooms": {
+              "type": "number"
+            },
+            "avgSquareFeet": {
+              "type": "number"
+            },
+            "minPrice": {
+              "type": "integer"
+            },
+            "maxPrice": {
+              "type": "integer"
+            },
+            "count": {
+              "type": "integer"
+            }
+          }
+        },
+        "Housing": {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "housing": {
+                  "type": "object",
+                  "properties": {
+                    "median_home_construction": {
+                      "type": "integer"
+                    },
+                    "median_rent": {
+                      "type": "integer"
+                    },
+                    "home_occupied_percent": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "renter_occupied": {
+                      "type": "integer"
+                    },
+                    "owner_occupied": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "DOM": {
           "type": "object",
           "properties": {
             "value": {
-              "type": "integer"
+              "type": "integer",
+              "example": 20
             },
             "monthly": {
               "type": "array",
@@ -1906,10 +1258,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 7
                   }
                 }
               }
@@ -1920,7 +1274,8 @@
           "type": "object",
           "properties": {
             "value": {
-              "type": "string"
+              "type": "string",
+              "example": "100%"
             },
             "monthly": {
               "type": "array",
@@ -1928,10 +1283,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "102%"
                   }
                 }
               }
@@ -1942,7 +1299,8 @@
           "type": "object",
           "properties": {
             "value": {
-              "type": "integer"
+              "type": "integer",
+              "example": 1946
             },
             "monthly": {
               "type": "array",
@@ -1950,10 +1308,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1950
                   }
                 }
               }
@@ -1964,7 +1324,8 @@
           "type": "object",
           "properties": {
             "value": {
-              "type": "integer"
+              "type": "integer",
+              "example": 136
             },
             "monthly": {
               "type": "array",
@@ -1972,10 +1333,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 154
                   }
                 }
               }
@@ -1986,7 +1349,8 @@
           "type": "object",
           "properties": {
             "value": {
-              "type": "integer"
+              "type": "integer",
+              "example": 154265
             },
             "monthly": {
               "type": "array",
@@ -1994,10 +1358,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 162660
                   }
                 }
               }
@@ -2008,7 +1374,8 @@
           "type": "object",
           "properties": {
             "value": {
-              "type": "integer"
+              "type": "integer",
+              "example": 59
             },
             "monthly": {
               "type": "array",
@@ -2016,10 +1383,12 @@
                 "type": "object",
                 "properties": {
                   "key": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Nov"
                   },
                   "value": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 10
                   }
                 }
               }
@@ -2037,34 +1406,46 @@
             "type": "object",
             "properties": {
               "fname": {
-                "type": "string"
+                "type": "string",
+                "example": "Susan"
               },
               "lname": {
-                "type": "string"
+                "type": "string",
+                "example": "Kirkpatrick"
               },
               "brokerage": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "example": [
+                    "liveby",
+                    "homerealestate"
+                  ]
                 }
               },
               "brokerageName": {
-                "type": "string"
+                "type": "string",
+                "example": "HOME Real Estate"
               },
               "website": {
-                "type": "string"
+                "type": "string",
+                "example": "http://www.susankirkpatrick.homerealestate.com/"
               },
               "photo": {
-                "type": "string"
+                "type": "string",
+                "example": "https://content.mediastg.net/dynamic/RealEstate/company/375/account/347911/photo.jpg"
               },
               "neighborhood": {
-                "type": "string"
+                "type": "string",
+                "example": "593979d6da3374b282bb7ba7"
               },
               "label": {
-                "type": "string"
+                "type": "string",
+                "example": "40th & A"
               },
               "text": {
-                "type": "string"
+                "type": "string",
+                "example": "This is a neighborhood of well maintained homes.  The homes are modest.  However, there is evident pride in their ownerships. \nThey are very close to a local grocery store, within walking distance.  And a large park is less than a mile away with indoor and outdoor tennis and a very nice swimming pool"
               }
             }
           }
@@ -2146,9 +1527,7 @@
         "pointsOfInterest": {
           "type": "array",
           "items": {
-            "example": {
-              "$ref": "#/definitions/PointOfInterest"
-            }
+            "$ref": "#/definitions/PointOfInterest"
           }
         }
       }
@@ -2165,7 +1544,7 @@
             },
             "html": {
               "type": "string",
-              "example": "CAPM Classroom Training in Lincoln, NE"
+              "example": "CAPM Classroom Training<br>in Lincoln, NE"
             }
           }
         },
@@ -2440,65 +1819,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Event"
-          }
-        }
-      }
-    },
-    "PropertyAreaInfo": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string"
-        },
-        "avgBedrooms": {
-          "type": "number"
-        },
-        "avgBathrooms": {
-          "type": "number"
-        },
-        "avgSquareFeet": {
-          "type": "number"
-        },
-        "minPrice": {
-          "type": "integer"
-        },
-        "maxPrice": {
-          "type": "integer"
-        },
-        "count": {
-          "type": "integer"
-        }
-      }
-    },
-    "Housing": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "housing": {
-              "type": "object",
-              "properties": {
-                "median_home_construction": {
-                  "type": "integer"
-                },
-                "median_rent": {
-                  "type": "integer"
-                },
-                "home_occupied_percent": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                },
-                "renter_occupied": {
-                  "type": "integer"
-                },
-                "owner_occupied": {
-                  "type": "integer"
-                }
-              }
-            }
           }
         }
       }
