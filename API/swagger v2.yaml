@@ -24,19 +24,16 @@ consumes:
 produces:
   - application/json
 paths:
-  '/agent-insights/:pageId':
+  '/agent-insights/:pageid':
     get:
       tags:
         - Individual Content
       description: Get a list of insights that real-estate agents have submitted on a page.
       parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              pageID:
-                type: integer
+        - name: pageid
+          in: path
+          type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -62,19 +59,16 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Schools'
-  '/schools/:schoolId':
+  '/schools/:schoolid':
     get:
       tags:
         - Individual Content
       description: Get detailed data on an individual school.
       parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              schoolID:
-                type: integer
+        - name: schoolid
+          in: path
+          type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -82,26 +76,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/School'
-  '/businesses/:businessId':
-    get:
-      tags:
-        - Individual Content
-      description: Get demographic-related information on an area.
-      parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              geometry:
-                $ref: '#/definitions/Geometry'
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            items:
-              $ref: '#/definitions/Business'
+
   /points-of-interest:
     post:
       tags:
@@ -142,19 +117,16 @@ paths:
             type: object
             items:
               $ref: '#/definitions/MarketTrends'
-  '/points-of-interest/:poiId':
+  '/points-of-interest/:poiid':
     get:
       tags:
         - Individual Content
       description: Get detailed data on an individual point-of-interest.
       parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              geometry:
-                $ref: '#/definitions/Geometry'
+        - name: poiid
+          in: path
+          type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -162,19 +134,16 @@ paths:
             type: object
             items:
               $ref: '#/definitions/PointOfInterest'
-  '/events/:eventId':
+  '/events/:eventid':
     get:
       tags:
         - Individual Content
       description: Get detailed data on an individual event.
       parameters:
-        - name: body
-          in: body
-          schema:
-            type: object
-            properties:
-              geometry:
-                $ref: '#/definitions/Geometry'
+        - name: eventid
+          in: path
+          type: string
+          required: true
       responses:
         '200':
           description: OK
@@ -282,9 +251,7 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Commute'
-
-
-  '/boundaries/:boundaryId':
+  '/boundaries/:boundaryid':
     get:
       tags:
         - Boundaries by ID
@@ -294,8 +261,8 @@ paths:
         (unified, secondary, and elementary), urban areas, zipcodes
         (non-census), cities, and neighborhoods.
       parameters:
-        - name: boundaryId
-          in: query
+        - name: boundaryid
+          in: path
           description: The LiveBy boundary ID
           required: true
           type: string
@@ -306,25 +273,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Boundary'
-  '/boundaries/census/zipcode-tabulation-area/:zipcode':
-    get:
-      tags:
-        - Boundaries by ID
-      description: Geographical boundaries derived from Census data.
-      parameters:
-        - name: zipcode
-          in: query
-          description: Zipcode (5 digit)
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Feature'
-  '/boundaries/census/:geoId':
+  '/boundaries/census/:geoid':
     get:
       tags:
         - Boundaries by ID
@@ -340,6 +289,24 @@ paths:
           description: The GEOID of the census block
           required: true
           type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Feature'
+  '/boundaries/census/zipcode-tabulation-area/:zipcode':
+    get:
+      tags:
+        - Boundaries by ID
+      description: Geographical boundaries derived from Census data.
+      parameters:
+        - name: zipcode
+          in: path
+          description: Zipcode (5 digit)
+          required: true
+          type: integer
       responses:
         '200':
           description: OK
@@ -1388,7 +1355,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Event'
-  
   Demographics:
     type: object
     properties:

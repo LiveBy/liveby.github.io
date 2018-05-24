@@ -36,7 +36,7 @@
     "application/json"
   ],
   "paths": {
-    "/agent-insights/:pageId": {
+    "/agent-insights/:pageid": {
       "get": {
         "tags": [
           "Individual Content"
@@ -44,16 +44,10 @@
         "description": "Get a list of insights that real-estate agents have submitted on a page.",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "pageID": {
-                  "type": "integer"
-                }
-              }
-            }
+            "name": "pageid",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -99,7 +93,7 @@
         }
       }
     },
-    "/schools/:schoolId": {
+    "/schools/:schoolid": {
       "get": {
         "tags": [
           "Individual Content"
@@ -107,16 +101,10 @@
         "description": "Get detailed data on an individual school.",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "schoolID": {
-                  "type": "integer"
-                }
-              }
-            }
+            "name": "schoolid",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -126,39 +114,6 @@
               "type": "object",
               "items": {
                 "$ref": "#/definitions/School"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/businesses/:businessId": {
-      "get": {
-        "tags": [
-          "Individual Content"
-        ],
-        "description": "Get demographic-related information on an area.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "geometry": {
-                  "$ref": "#/definitions/Geometry"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Business"
               }
             }
           }
@@ -231,7 +186,7 @@
         }
       }
     },
-    "/points-of-interest/:poiId": {
+    "/points-of-interest/:poiid": {
       "get": {
         "tags": [
           "Individual Content"
@@ -239,16 +194,10 @@
         "description": "Get detailed data on an individual point-of-interest.",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "geometry": {
-                  "$ref": "#/definitions/Geometry"
-                }
-              }
-            }
+            "name": "poiid",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -264,7 +213,7 @@
         }
       }
     },
-    "/events/:eventId": {
+    "/events/:eventid": {
       "get": {
         "tags": [
           "Individual Content"
@@ -272,16 +221,10 @@
         "description": "Get detailed data on an individual event.",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "geometry": {
-                  "$ref": "#/definitions/Geometry"
-                }
-              }
-            }
+            "name": "eventid",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -462,7 +405,7 @@
         }
       }
     },
-    "/boundaries/:boundaryId": {
+    "/boundaries/:boundaryid": {
       "get": {
         "tags": [
           "Boundaries by ID"
@@ -470,8 +413,8 @@
         "description": "Returns a single boundary for the LiveBy boundary ID you provide. Boundaries at this endpoint include: school district boundaries (unified, secondary, and elementary), urban areas, zipcodes (non-census), cities, and neighborhoods.",
         "parameters": [
           {
-            "name": "boundaryId",
-            "in": "query",
+            "name": "boundaryid",
+            "in": "path",
             "description": "The LiveBy boundary ID",
             "required": true,
             "type": "string"
@@ -490,19 +433,19 @@
         }
       }
     },
-    "/boundaries/census/zipcode-tabulation-area/:zipcode": {
+    "/boundaries/census/:geoid": {
       "get": {
         "tags": [
           "Boundaries by ID"
         ],
-        "description": "Geographical boundaries derived from Census data.",
+        "description": "Geographical boundaries derived from Census data. Returns a single boundary that matches the GeoID you provide, with the exception of zip codes (which have a separate endpoint). Supported GeoID census boundary types: blocks, block groups, tracts, public use microdata areas, counties, states, and county subdivisions.",
         "parameters": [
           {
-            "name": "zipcode",
-            "in": "query",
-            "description": "Zipcode (5 digit)",
+            "name": "geoid",
+            "in": "path",
+            "description": "The GEOID of the census block",
             "required": true,
-            "type": "integer"
+            "type": "string"
           }
         ],
         "responses": {
@@ -518,19 +461,19 @@
         }
       }
     },
-    "/boundaries/census/:geoId": {
+    "/boundaries/census/zipcode-tabulation-area/:zipcode": {
       "get": {
         "tags": [
           "Boundaries by ID"
         ],
-        "description": "Geographical boundaries derived from Census data. Returns a single boundary that matches the GeoID you provide, with the exception of zip codes (which have a separate endpoint). Supported GeoID census boundary types: blocks, block groups, tracts, public use microdata areas, counties, states, and county subdivisions.",
+        "description": "Geographical boundaries derived from Census data.",
         "parameters": [
           {
-            "name": "geoid",
+            "name": "zipcode",
             "in": "path",
-            "description": "The GEOID of the census block",
+            "description": "Zipcode (5 digit)",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "responses": {
