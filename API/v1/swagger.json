@@ -1,0 +1,1773 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Access LiveBy's entire suite of hyper-local data through our custom API to create or enhance your own products. Need API access? Let us know!",
+    "version": "1.0.0",
+    "title": "LiveBy",
+    "termsOfService": "https://liveby.com/terms/"
+  },
+  "host": "api.liveby.com",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "Endpoints",
+      "description": "API endpoints"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/simply-rets-service/properties": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get properties in the given geometry.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Use this to filter properties by status.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Active",
+                      "ActiveUnderContract",
+                      "Pending",
+                      "Closed"
+                    ]
+                  }
+                },
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                },
+                "select": {
+                  "description": "Use this to return only the fields specified by this filter.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "offset": {
+                  "description": "Use this to page through properties.",
+                  "default": 0,
+                  "type": "integer"
+                },
+                "limit": {
+                  "description": "Use this to increase or descrease the amount of properties returned.",
+                  "default": 20,
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Property"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/local-insights": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get list of attributes people say about this area.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ne",
+            "description": "NorthEast coordinate of the bounding box to find insights for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sw",
+            "in": "query",
+            "description": "SouthWest coordinate of the bounding box to find insights for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocalInsight"
+            }
+          }
+        }
+      }
+    },
+    "/schools": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get schools and the info about them, sorted by distance to the requested point.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude of the place to find schools for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude of the place to find schools for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Full length name of the state the coordinates exists in.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/School"
+            }
+          }
+        }
+      }
+    },
+    "/market-stats": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get market stats, by month, for a given area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                },
+                "months": {
+                  "description": "The amount of whole months that will be calculated. This starts with the last completed month, and goes back the desired amount of months.",
+                  "type": "number",
+                  "default": 6
+                },
+                "zipcode": {
+                  "description": "Filter properties by the zipcode they are in. Must be used if geometry and city are not.",
+                  "type": "string"
+                },
+                "city": {
+                  "description": "Filter properties by the city they are in. Must be used if geometry and zipcode are not.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/marketStats"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/insights": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get agent's description of a neighborhood.",
+        "parameters": [
+          {
+            "name": "brokerage",
+            "description": "the agents' brokerage. Usually denoted by the brokerages domain name.",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "neighborhood",
+            "description": "ID of boundary.",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentInsight"
+            }
+          }
+        }
+      }
+    },
+    "/yelp-businesses": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get points of interest in the area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "description": "latitude of the center of the geometry",
+                  "type": "string"
+                },
+                "lng": {
+                  "description": "longitude of the center of the geometry",
+                  "type": "string"
+                },
+                "geometry": {
+                  "$ref": "#/definitions/Geometry"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PointsOfInterest"
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get events near this geometry.",
+        "parameters": [
+          {
+            "name": "geometry",
+            "in": "body",
+            "description": "geometry used to find events in.",
+            "schema": {
+              "$ref": "#/definitions/Geometry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/properties-attribute-aggregators": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get current, or historical information about the market in the area.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "description": "Whether to get historical or current information",
+                  "enum": [
+                    "Active",
+                    "Closed"
+                  ]
+                },
+                "neighborhood": {
+                  "description": "The geometry of the neighborhood.",
+                  "type": "object",
+                  "properties": {
+                    "geometry": {
+                      "$ref": "#/definitions/Geometry"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PropertyAreaInfo"
+            }
+          }
+        }
+      }
+    },
+    "/demographics": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get demographics for a place.",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The place to calculate demographics for.",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "neighborhood": {
+                  "type": "object",
+                  "properties": {
+                    "geometry": {
+                      "$ref": "#/definitions/Geometry"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Demographics"
+            }
+          }
+        }
+      }
+    },
+    "/housing": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get housing information for a place.",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The place to calculate housing information for.",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "neighborhood": {
+                  "type": "object",
+                  "properties": {
+                    "geometry": {
+                      "$ref": "#/definitions/Geometry"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Housing"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Property": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "privateRemarks": {
+          "type": "string"
+        },
+        "property": {
+          "type": "object",
+          "properties": {
+            "roof": {
+              "type": "string"
+            },
+            "cooling": {
+              "type": "string"
+            },
+            "style": {
+              "type": "string"
+            },
+            "area": {
+              "type": "integer"
+            },
+            "bathsFull": {
+              "type": "integer"
+            },
+            "bathsHalf": {
+              "type": "integer"
+            },
+            "stories": {
+              "type": "integer"
+            },
+            "fireplaces": {
+              "type": "integer"
+            },
+            "flooring": {
+              "type": "string"
+            },
+            "heating": {
+              "type": "string"
+            },
+            "bathrooms": {
+              "type": "integer"
+            },
+            "foundation": {
+              "type": "string"
+            },
+            "laundryFeatures": {
+              "type": "string"
+            },
+            "occupantName": {
+              "type": "string"
+            },
+            "ownerName": {
+              "type": "string"
+            },
+            "lotDescription": {
+              "type": "string"
+            },
+            "pool": {
+              "type": "string"
+            },
+            "subType": {
+              "type": "string"
+            },
+            "bedrooms": {
+              "type": "integer"
+            },
+            "interiorFeatures": {
+              "type": "string"
+            },
+            "lotSize": {
+              "type": "string"
+            },
+            "areaSource": {
+              "type": "string"
+            },
+            "maintenanceExpense": {
+              "type": "integer"
+            },
+            "additionalRooms": {
+              "type": "string"
+            },
+            "exteriorFeatures": {
+              "type": "string"
+            },
+            "water": {
+              "type": "string"
+            },
+            "view": {
+              "type": "string"
+            },
+            "lotSizeArea": {
+              "type": "integer"
+            },
+            "subdivision": {
+              "type": "string"
+            },
+            "construction": {
+              "type": "string"
+            },
+            "parking": {
+              "type": "object",
+              "properties": {
+                "leased": {
+                  "type": "string"
+                },
+                "spaces": {
+                  "type": "integer"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            },
+            "lotSizeAreaUnits": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "garageSpaces": {
+              "type": "integer"
+            },
+            "bathsThreeQuarter": {
+              "type": "integer"
+            },
+            "accessibility": {
+              "type": "string"
+            },
+            "acres": {
+              "type": "string"
+            },
+            "occupantType": {
+              "type": "string"
+            },
+            "subTypeText": {
+              "type": "string"
+            },
+            "yearBuilt": {
+              "type": "integer"
+            }
+          }
+        },
+        "mlsId": {
+          "type": "integer"
+        },
+        "terms": {
+          "type": "string"
+        },
+        "showingInstructions": {
+          "type": "string"
+        },
+        "office": {
+          "type": "object",
+          "properties": {
+            "contact": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "office": {
+                  "type": "string"
+                },
+                "cell": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "string"
+            },
+            "servingName": {
+              "type": "string"
+            },
+            "brokerid": {
+              "type": "string"
+            }
+          }
+        },
+        "leaseTerm": {
+          "type": "string"
+        },
+        "disclaimer": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "crossStreet": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            },
+            "streetName": {
+              "type": "string"
+            },
+            "streetNumberText": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "streetNumber": {
+              "type": "integer"
+            },
+            "full": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        "agreement": {
+          "type": "string"
+        },
+        "listDate": {
+          "type": "integer"
+        },
+        "agent": {
+          "type": "object",
+          "properties": {
+            "lastName": {
+              "type": "string"
+            },
+            "contact": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "office": {
+                  "type": "string"
+                },
+                "cell": {
+                  "type": "string"
+                }
+              }
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          }
+        },
+        "modified": {
+          "type": "integer"
+        },
+        "school": {
+          "type": "object",
+          "properties": {
+            "middleSchool": {
+              "type": "string"
+            },
+            "highSchool": {
+              "type": "string"
+            },
+            "elementarySchool": {
+              "type": "string"
+            },
+            "district": {
+              "type": "string"
+            }
+          }
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "listPrice": {
+          "type": "integer"
+        },
+        "listingId": {
+          "type": "string"
+        },
+        "mls": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "area": {
+              "type": "string"
+            },
+            "daysOnMarket": {
+              "type": "integer"
+            },
+            "originatingSystemName": {
+              "type": "string"
+            },
+            "statusText": {
+              "type": "string"
+            },
+            "areaMinor": {
+              "type": "string"
+            }
+          }
+        },
+        "geo": {
+          "type": "object",
+          "properties": {
+            "county": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            },
+            "marketArea": {
+              "type": "string"
+            },
+            "directions": {
+              "type": "string"
+            }
+          }
+        },
+        "tax": {
+          "type": "object",
+          "properties": {
+            "taxYear": {
+              "type": "integer"
+            },
+            "taxAnnualAmount": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          }
+        },
+        "coAgent": {
+          "type": "string"
+        },
+        "sales": {
+          "type": "object",
+          "properties": {
+            "closeDate": {
+              "type": "string"
+            }
+          }
+        },
+        "leaseType": {
+          "type": "string"
+        },
+        "virtualTourUrl": {
+          "type": "string"
+        },
+        "remarks": {
+          "type": "string"
+        },
+        "association": {
+          "type": "object",
+          "properties": {
+            "fee": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "amenities": {
+              "type": "string"
+            }
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "lastCachedDate": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      }
+    },
+    "LocalInsight": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "School": {
+      "type": "object",
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gsId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "gradeRange": {
+                "type": "string"
+              },
+              "enrollment": {
+                "type": "string"
+              },
+              "gsRating": {
+                "type": "string"
+              },
+              "parentRating": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "districtId": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "districtNCESId": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "fax": {
+                "type": "string"
+              },
+              "website": {
+                "type": "object"
+              },
+              "ncesId": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "string"
+              },
+              "lon": {
+                "type": "string"
+              },
+              "overviewLink": {
+                "type": "string"
+              },
+              "ratingsLink": {
+                "type": "string"
+              },
+              "reviewsLink": {
+                "type": "string"
+              },
+              "distance": {
+                "type": "string"
+              },
+              "schoolStatsLink": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "marketStats": {
+      "type": "object",
+      "properties": {
+        "DOM": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ExpectToPay": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "YearBuilt": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PPSF": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SalePrice": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "AmountOfSales": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "monthly": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AgentInsight": {
+      "type": "object",
+      "properties": {
+        "insights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "brokerage": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "brokerageName": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "photo": {
+                "type": "string"
+              },
+              "neighborhood": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PointsOfInterest": {
+      "type": "object",
+      "properties": {
+        "dining": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "shopping": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "active": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "nightlife": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "beauty": {
+          "type": "object",
+          "properties": {
+            "business": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "review_count": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  },
+                  "photos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "coordinates": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "html": {
+                    "type": "string"
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "html": {
+                    "type": "string"
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "utc": {
+                    "type": "string"
+                  }
+                }
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "local": {
+                    "type": "string"
+                  },
+                  "utc": {
+                    "type": "string"
+                  }
+                }
+              },
+              "organization_id": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string"
+              },
+              "changed": {
+                "type": "string"
+              },
+              "capacity": {
+                "type": "integer"
+              },
+              "capacity_is_custom": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "listed": {
+                "type": "boolean"
+              },
+              "shareable": {
+                "type": "boolean"
+              },
+              "online_event": {
+                "type": "boolean"
+              },
+              "tx_time_limit": {
+                "type": "integer"
+              },
+              "hide_start_date": {
+                "type": "boolean"
+              },
+              "hide_end_date": {
+                "type": "boolean"
+              },
+              "locale": {
+                "type": "string"
+              },
+              "is_locked": {
+                "type": "boolean"
+              },
+              "privacy_setting": {
+                "type": "string"
+              },
+              "is_series": {
+                "type": "boolean"
+              },
+              "is_series_parent": {
+                "type": "boolean"
+              },
+              "is_reserved_seating": {
+                "type": "boolean"
+              },
+              "show_pick_a_seat": {
+                "type": "boolean"
+              },
+              "show_seatmap_thumbnail": {
+                "type": "boolean"
+              },
+              "show_colors_in_seatmap_thumbnail": {
+                "type": "boolean"
+              },
+              "source": {
+                "type": "string"
+              },
+              "is_free": {
+                "type": "boolean"
+              },
+              "version": {
+                "type": "string"
+              },
+              "logo_id": {
+                "type": "string"
+              },
+              "organizer_id": {
+                "type": "string"
+              },
+              "venue_id": {
+                "type": "string"
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "subcategory_id": {
+                "type": "string"
+              },
+              "format_id": {
+                "type": "string"
+              },
+              "resource_uri": {
+                "type": "string"
+              },
+              "series_id": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "object",
+                "properties": {
+                  "crop_mask": {
+                    "type": "object",
+                    "properties": {
+                      "top_left": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "integer"
+                          },
+                          "y": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "width": {
+                        "type": "integer"
+                      },
+                      "height": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "original": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "integer"
+                      },
+                      "height": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "aspect_ratio": {
+                    "type": "string"
+                  },
+                  "edge_color": {
+                    "type": "string"
+                  },
+                  "edge_color_set": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "PropertyAreaInfo": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "avgBedrooms": {
+          "type": "number"
+        },
+        "avgBathrooms": {
+          "type": "number"
+        },
+        "avgSquareFeet": {
+          "type": "number"
+        },
+        "minPrice": {
+          "type": "integer"
+        },
+        "maxPrice": {
+          "type": "integer"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "Demographics": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "demographics": {
+              "type": "object",
+              "properties": {
+                "population": {
+                  "type": "integer"
+                },
+                "median_age": {
+                  "type": "number"
+                },
+                "ages": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "ages_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "median_household_income": {
+                  "type": "number"
+                },
+                "unemployment_rate": {
+                  "type": "null"
+                },
+                "diversity": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "asian": {
+                      "type": "integer"
+                    },
+                    "african_american": {
+                      "type": "integer"
+                    },
+                    "hispanic": {
+                      "type": "integer"
+                    },
+                    "multiracial": {
+                      "type": "integer"
+                    },
+                    "native_american": {
+                      "type": "integer"
+                    },
+                    "other": {
+                      "type": "integer"
+                    },
+                    "pacific_islander": {
+                      "type": "integer"
+                    },
+                    "white": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "diversity_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "total_educated": {
+                  "type": "integer"
+                },
+                "below_high_school_education": {
+                  "type": "integer"
+                },
+                "high_school_education": {
+                  "type": "integer"
+                },
+                "college_associate_degree": {
+                  "type": "integer"
+                },
+                "college_bachelor_degree": {
+                  "type": "integer"
+                },
+                "college_graduate_professional_degree": {
+                  "type": "integer"
+                },
+                "education_levels_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Housing": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "housing": {
+              "type": "object",
+              "properties": {
+                "median_home_construction": {
+                  "type": "integer"
+                },
+                "median_rent": {
+                  "type": "integer"
+                },
+                "home_occupied_percent": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "renter_occupied": {
+                  "type": "integer"
+                },
+                "owner_occupied": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Geometry": {
+      "type": "object",
+      "description": "GeoJSon geometry",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Polygon",
+            "MultiPolygon"
+          ],
+          "description": "the geometry type"
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "enum": [
+              {
+                "$ref": "#/definitions/Polygon"
+              },
+              {
+                "$ref": "#/definitions/MultiPolygon"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Polygon": {
+      "type": "array",
+      "description": "GeoJSon geometry",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Point2D"
+        }
+      }
+    },
+    "MultiPolygon": {
+      "type": "array",
+      "description": "GeoJSon geometry",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Point2D"
+          }
+        }
+      }
+    },
+    "Point2D": {
+      "type": "array",
+      "maxItems": 2,
+      "minItems": 2,
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}
