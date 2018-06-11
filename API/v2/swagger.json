@@ -14,8 +14,12 @@
       "description": "Individual GeoJSON shape."
     },
     {
-      "name": "Boundaries by location",
+      "name": "Boundaries by Location",
       "description": "GeoJSON shapes that represent different types of boundaries."
+    },
+    {
+      "name": "Boundaries by Search",
+      "description": "Search for specific boundary types with a text query."
     },
     {
       "name": "Local Content Datasets",
@@ -36,6 +40,104 @@
     "application/json"
   ],
   "paths": {
+    "/boundaries/search": {
+      "get": {
+        "tags": [
+          "Boundaries by Search"
+        ],
+        "description": "Search for a boundary by name",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "boundaryTypes",
+            "type": "array",
+            "required": true,
+            "in": "query",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cities",
+                "neighborhoods",
+                "zipcodes",
+                "urban-areas",
+                "unified-school-attendance-zones",
+                "secondary-school-attendance-zones",
+                "elementary-school-attendance-zones",
+                "parcels",
+                "subdivisions",
+                "counties",
+                "school-districts"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BoundaryCollection"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boundaries/census/search": {
+      "get": {
+        "tags": [
+          "Boundaries by Search"
+        ],
+        "description": "Search for a census boundary by name",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "censusBoundaryTypes",
+            "type": "array",
+            "required": true,
+            "in": "query",
+            "items": {
+              "type": "string",
+              "enum": [
+                "blocks",
+                "block-groups",
+                "tracts",
+                "public-use-microdata-area",
+                "zipcode-tabulation-area",
+                "county-subdivision",
+                "counties",
+                "states",
+                "metropolitan-division",
+                "metropolitan-statistical-area",
+                "combined-statistical-area"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BoundaryCollection"
+              }
+            }
+          }
+        }
+      }
+    },
     "/agent-insights/:pageid": {
       "get": {
         "tags": [
@@ -54,10 +156,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/AgentInsight"
-              }
+              "$ref": "#/definitions/AgentInsight"
             }
           }
         }
@@ -111,10 +210,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/School"
-              }
+              "$ref": "#/definitions/School"
             }
           }
         }
@@ -144,10 +240,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/PointsOfInterest"
-              }
+              "$ref": "#/definitions/PointsOfInterest"
             }
           }
         }
@@ -177,10 +270,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/MarketTrends"
-              }
+              "$ref": "#/definitions/MarketTrends"
             }
           }
         }
@@ -204,10 +294,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/PointOfInterest"
-              }
+              "$ref": "#/definitions/PointOfInterest"
             }
           }
         }
@@ -231,10 +318,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Event"
-              }
+              "$ref": "#/definitions/Event"
             }
           }
         }
@@ -264,10 +348,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Events"
-              }
+              "$ref": "#/definitions/Events"
             }
           }
         }
@@ -278,7 +359,7 @@
         "tags": [
           "Local Content Datasets"
         ],
-        "description": "Get environmental information on an area.",
+        "description": "A variety of information on the physical environment, starting with basic area measurement data and ending with climate data for weather stations around the country. The subjects are mostly environmental trends but include related subjects such as land use, water consumption, air pollutant emissions, toxic releases, oil spills, hazardous waste sites, municipal waste and recycling, threatened and endangered wildlife, and the environmental industry.",
         "parameters": [
           {
             "name": "body",
@@ -297,10 +378,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Environment"
-              }
+              "$ref": "#/definitions/Environment"
             }
           }
         }
@@ -330,10 +408,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Demographics"
-              }
+              "$ref": "#/definitions/Demographics"
             }
           }
         }
@@ -363,10 +438,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Crime"
-              }
+              "$ref": "#/definitions/Crime"
             }
           }
         }
@@ -396,10 +468,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Commute"
-              }
+              "$ref": "#/definitions/Commute"
             }
           }
         }
@@ -492,9 +561,9 @@
     "/boundaries": {
       "get": {
         "tags": [
-          "Boundaries by location"
+          "Boundaries by Location"
         ],
-        "description": "Non-census geographical boundaries, searchable by location (lat,lng,radius), zipcode, city, or state.",
+        "description": "Non-census geographical boundaries, searchable by location (lat,lng,radius), zipcode, city, or state. The following boundaries are available on-demand: subdivisions, parcels, and neighborhoods.",
         "parameters": [
           {
             "name": "lat",
@@ -549,7 +618,14 @@
                 "cities",
                 "neighborhoods",
                 "zipcodes",
-                "urban-areas"
+                "urban-areas",
+                "unified-school-attendance-zones",
+                "secondary-school-attendance-zones",
+                "elementary-school-attendance-zones",
+                "parcels",
+                "subdivisions",
+                "counties",
+                "school-districts"
               ]
             }
           }
@@ -567,10 +643,10 @@
         }
       }
     },
-    "/boundaries/census/": {
+    "/boundaries/census": {
       "get": {
         "tags": [
-          "Boundaries by location"
+          "Boundaries by Location"
         ],
         "summary": "Geographical boundaries derived from Census data.",
         "parameters": [
@@ -610,7 +686,10 @@
                 "zipcode-tabulation-area",
                 "county-subdivision",
                 "counties",
-                "states"
+                "states",
+                "metropolitan-division",
+                "metropolitan-statistical-area",
+                "combined-statistical-area"
               ]
             }
           }
@@ -626,267 +705,36 @@
       }
     }
   },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key"
+    }
+  },
   "definitions": {
     "Environment": {
       "type": "object",
       "properties": {
-        "latitude": {
+        "airQualityIndex": {
           "type": "integer",
-          "example": 42.3601
+          "description": "Air Quality Index (AQI)"
         },
-        "longitude": {
-          "type": "integer",
-          "example": -71.0589
-        },
-        "timezone": {
+        "floodHazard": {
           "type": "string",
-          "example": "America/New_York"
+          "description": "Flood hazard"
         },
-        "hourly": {
-          "type": "object",
-          "properties": {
-            "summary": {
-              "type": "string",
-              "example": "Snow (6–9 in.) and windy starting in the afternoon."
-            },
-            "icon": {
-              "type": "string",
-              "example": "snow"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "time": {
-                    "type": "integer",
-                    "example": 255589200
-                  },
-                  "summary": {
-                    "type": "string",
-                    "example": "Mostly Cloudy"
-                  },
-                  "icon": {
-                    "type": "string",
-                    "example": "partly-cloudy-night"
-                  },
-                  "precipIntensity": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "precipProbability": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "temperature": {
-                    "type": "integer",
-                    "example": 22.8
-                  },
-                  "apparentTemperature": {
-                    "type": "integer",
-                    "example": 16.46
-                  },
-                  "dewPoint": {
-                    "type": "integer",
-                    "example": 15.51
-                  },
-                  "humidity": {
-                    "type": "integer",
-                    "example": 0.73
-                  },
-                  "pressure": {
-                    "type": "integer",
-                    "example": 1026.78
-                  },
-                  "windSpeed": {
-                    "type": "integer",
-                    "example": 4.83
-                  },
-                  "windBearing": {
-                    "type": "integer",
-                    "example": 354
-                  },
-                  "cloudCover": {
-                    "type": "integer",
-                    "example": 0.78
-                  },
-                  "uvIndex": {
-                    "type": "integer",
-                    "example": 0
-                  },
-                  "visibility": {
-                    "type": "integer",
-                    "example": 9.62
-                  }
-                }
-              }
-            }
+        "pastPrecipitation": {
+          "type": "array",
+          "items": {
+            "type": "integer"
           }
         },
-        "daily": {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "time": {
-                    "type": "integer",
-                    "example": 255589200
-                  },
-                  "summary": {
-                    "type": "string",
-                    "example": "Snow (9–14 in.) and windy starting in the afternoon."
-                  },
-                  "icon": {
-                    "type": "string",
-                    "example": "snow"
-                  },
-                  "sunriseTime": {
-                    "type": "integer",
-                    "example": 255613996
-                  },
-                  "sunsetTime": {
-                    "type": "integer",
-                    "example": 255650764
-                  },
-                  "moonPhase": {
-                    "type": "integer",
-                    "example": 0.97
-                  },
-                  "precipIntensity": {
-                    "type": "integer",
-                    "example": 0.0354
-                  },
-                  "precipIntensityMax": {
-                    "type": "integer",
-                    "example": 0.1731
-                  },
-                  "precipIntensityMaxTime": {
-                    "type": "integer",
-                    "example": 255657600
-                  },
-                  "precipProbability": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "precipAccumulation": {
-                    "type": "integer",
-                    "example": 7.337
-                  },
-                  "precipType": {
-                    "type": "string",
-                    "example": "snow"
-                  },
-                  "temperatureHigh": {
-                    "type": "integer",
-                    "example": 31.84
-                  },
-                  "temperatureHighTime": {
-                    "type": "integer",
-                    "example": 255632400
-                  },
-                  "temperatureLow": {
-                    "type": "integer",
-                    "example": 28.63
-                  },
-                  "temperatureLowTime": {
-                    "type": "integer",
-                    "example": 255697200
-                  },
-                  "apparentTemperatureHigh": {
-                    "type": "integer",
-                    "example": 20.47
-                  },
-                  "apparentTemperatureHighTime": {
-                    "type": "integer",
-                    "example": 255625200
-                  },
-                  "apparentTemperatureLow": {
-                    "type": "integer",
-                    "example": 13.03
-                  },
-                  "apparentTemperatureLowTime": {
-                    "type": "integer",
-                    "example": 255697200
-                  },
-                  "dewPoint": {
-                    "type": "integer",
-                    "example": 24.72
-                  },
-                  "humidity": {
-                    "type": "integer",
-                    "example": 0.86
-                  },
-                  "pressure": {
-                    "type": "integer",
-                    "example": 1016.41
-                  },
-                  "windSpeed": {
-                    "type": "integer",
-                    "example": 22.93
-                  },
-                  "windBearing": {
-                    "type": "integer",
-                    "example": 56
-                  },
-                  "cloudCover": {
-                    "type": "integer",
-                    "example": 0.95
-                  },
-                  "uvIndex": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "uvIndexTime": {
-                    "type": "integer",
-                    "example": 255621600
-                  },
-                  "visibility": {
-                    "type": "integer",
-                    "example": 4.83
-                  },
-                  "temperatureMin": {
-                    "type": "integer",
-                    "example": 22.72
-                  },
-                  "temperatureMinTime": {
-                    "type": "integer",
-                    "example": 255596400
-                  },
-                  "temperatureMax": {
-                    "type": "integer",
-                    "example": 32.04
-                  },
-                  "temperatureMaxTime": {
-                    "type": "integer",
-                    "example": 255672000
-                  },
-                  "apparentTemperatureMin": {
-                    "type": "integer",
-                    "example": 11.13
-                  },
-                  "apparentTemperatureMinTime": {
-                    "type": "integer",
-                    "example": 255650400
-                  },
-                  "apparentTemperatureMax": {
-                    "type": "integer",
-                    "example": 20.47
-                  },
-                  "apparentTemperatureMaxTime": {
-                    "type": "integer",
-                    "example": 255625200
-                  }
-                }
-              }
-            }
+        "pastTemperature": {
+          "type": "array",
+          "items": {
+            "type": "integer"
           }
-        },
-        "offset": {
-          "type": "integer",
-          "example": -5
         }
       }
     },
