@@ -239,6 +239,13 @@ a {
   font-weight: normal;
   border-bottom: 1px solid lightgray;
   padding: 0.5em;
+  position: relative;
+}
+.main-content .data-list li li span {
+  position: absolute;
+  right: 1em;
+  text-transform: uppercase;
+  font-size: 80%;
 }
 .main-content .data-list li li:last-child {
   border-bottom: none;
