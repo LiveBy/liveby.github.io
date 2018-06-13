@@ -6,14 +6,6 @@
   "pages": [
     {
       "path": ""
-    },
-    {
-      "path": "profile-redirection",
-      "title": "Neighborhood Profile Redirection"
-    },
-    {
-      "path": "vendor",
-      "title": "Users"
     }
   ],
   "scripts": {
@@ -36,7 +28,13 @@
     "nodemon": "1.17.4",
     "serve-static": "1.13.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-config-standard": "11.0.0",
+    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-promise": "3.8.0",
+    "eslint-plugin-standard": "3.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LiveBy/liveby.github.io.git"
